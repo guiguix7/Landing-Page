@@ -25,5 +25,5 @@ Landing page do curriculo com foco em frontend. Projeto estatico feito com HTML,
 
 ## Como rodar
 
-1. Abra o link https://landing-page-rho-three-80.vercel.app/
+1. Abra o link https://landing-page-rho-three-80.vercel.app/Public/
 
