@@ -9,11 +9,28 @@
     --muted: #516173;
     --line: rgba(11, 22, 36, 0.12);
     --card: #ffffff;
-    --accent: #11345b;
-    --accent-strong: #0a2744;
-    --accent-soft: #d7e4f2;
+    --accent: #0e3156;
+    --accent-strong: #08233f;
+    --accent-soft: #dbe7f6;
+    --accent-warm: #d6772f;
     --radius: 20px;
-    --shadow: 0 18px 45px rgba(8, 18, 32, 0.12);
+    --shadow: 0 20px 55px rgba(8, 18, 32, 0.12);
+    --shadow-hover: 0 25px 60px rgba(8, 18, 32, 0.2);
+    --shadow-soft: 0 10px 30px rgba(8, 18, 32, 0.08);
+    --frontend-color: #c13584;
+    /*
+    Paleta de Cores por tipo (Conhecimentos gerais, Front-end, Back-end, Banco de Dados, Soft Skills):
+    Conhecimentos gerais: #1e5f8a (azul escuro)
+    Front-end: #c13584 (rosa vibrante)
+    Back-end: #4a90e2 (azul claro)
+    Banco de Dados: #50c878 (verde)
+    Soft Skills: #ffa500 (laranja)
+    Frameworks: #8a2be2 (roxo)
+    */
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 * {
@@ -29,6 +46,7 @@ body {
     color: var(--ink);
     line-height: 1.6;
     position: relative;
+    overflow-x: hidden;
 }
 
 body::before,
@@ -42,19 +60,21 @@ body::after {
 
 body::before {
     background:
-        radial-gradient(circle at 12% 12%, rgba(17, 52, 91, 0.15), transparent 45%),
-        radial-gradient(circle at 80% 10%, rgba(30, 95, 138, 0.12), transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(17, 52, 91, 0.12), transparent 40%);
+        radial-gradient(circle at 8% 12%, rgba(14, 49, 86, 0.16), transparent 46%),
+        radial-gradient(circle at 78% 8%, rgba(24, 86, 120, 0.12), transparent 45%),
+        radial-gradient(circle at 84% 88%, rgba(13, 44, 78, 0.12), transparent 42%);
 }
 
 body::after {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(244, 246, 251, 0.9));
-    mix-blend-mode: screen;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(244, 246, 251, 0.96)),
+        repeating-linear-gradient(120deg, rgba(17, 52, 91, 0.04) 0 1px, transparent 1px 12px);
 }
 
 a {
     color: inherit;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 a:hover {
@@ -81,16 +101,81 @@ ul {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 32px;
-    background: var(--card);
+    background:
+        linear-gradient(135deg, rgba(14, 49, 86, 0.08), rgba(255, 255, 255, 0) 55%),
+        var(--card);
     border: 1px solid var(--line);
     border-radius: 28px;
     padding: 32px;
     box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-card::after {
+    content: "";
+    position: absolute;
+    right: -140px;
+    top: -160px;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(14, 49, 86, 0.18), transparent 70%);
+    opacity: 0.7;
+}
+
+.header-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.divider {
+    grid-column: 1 / -1;
+    border: 0;
+    height: 1px;
+    margin: 10px 0 4px;
+    background: linear-gradient(90deg, transparent, rgba(17, 52, 91, 0.35), transparent);
+}
+
+.nav {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -12px;
+    gap: 8px 12px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(10px);
+}
+
+.nav-list a {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+}
+
+.nav-list a:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.nav-list a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 .avatar {
-    width: 88px;
-    height: 88px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, #ffffff, var(--accent-soft));
     border: 1px solid rgba(17, 52, 91, 0.2);
@@ -101,6 +186,7 @@ ul {
     font-family: var(--font-title);
     font-weight: 600;
     letter-spacing: 0.18em;
+    box-shadow: 0 14px 28px rgba(8, 18, 32, 0.12);
 }
 
 .header-text {
@@ -115,12 +201,17 @@ ul {
     font-size: 0.75rem;
     letter-spacing: 0.24em;
     color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    width: fit-content;
 }
 
 h1 {
     font-family: var(--font-title);
     font-size: clamp(2rem, 3.4vw, 3.1rem);
     line-height: 1.1;
+    letter-spacing: -0.015em;
 }
 
 h2 {
@@ -136,16 +227,45 @@ h3 {
 }
 
 .role {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--ink-soft);
+    margin-top: 6px;
+    max-width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.318);
+    width: fit-content;
+    font-family: var(--font-mono);
 }
 
 .cta-row {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-    margin-top: 8px;
+    margin-top: -40px;
+    justify-content: end;
+    align-items: center;
+}
+.cta-row-footer {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-block-end: -30px;
+}
+
+.cta-row-footer .btn {
+    gap: 8px;
+}
+
+.cta-row-footer .btn img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
 }
 
 .cta-row .btn {
@@ -169,12 +289,19 @@ h3 {
     font-size: 0.95rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     cursor: pointer;
+    will-change: transform;
 }
 
 .btn.primary {
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    border-color: transparent;
     color: #ffffff;
     box-shadow: 0 12px 30px rgba(17, 52, 91, 0.2);
+    width: 200px;
+}
+
+.btn.primary:hover {
+    box-shadow: 0 16px 34px rgba(17, 52, 91, 0.26);
 }
 
 .btn.ghost {
@@ -233,6 +360,7 @@ h3 {
 
 .section {
     margin-top: 56px;
+    scroll-margin-top: 120px;
 }
 
 .section-header {
@@ -243,9 +371,32 @@ h3 {
     margin-bottom: 24px;
 }
 
+.section-header h2 {
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.section-header h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 52px;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), #1e5f8a);
+}
+
 .section-header p {
     max-width: 480px;
     color: var(--muted);
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(17, 52, 91, 0.4), transparent);
+    margin: 16px 0 24px;
 }
 
 .callout {
@@ -256,6 +407,19 @@ h3 {
     font-size: 1.05rem;
     color: var(--ink-soft);
     box-shadow: 0 8px 20px rgba(11, 22, 36, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.callout::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent);
+    opacity: 0.7;
 }
 
 .about-card {
@@ -287,15 +451,32 @@ h3 {
 }
 
 .skill-card {
-    background: var(--card);
+    background: linear-gradient(180deg, #ffffff, #f8fbff);
     border: 1px solid var(--line);
     border-radius: 20px;
     padding: 24px;
     box-shadow: 0 10px 22px rgba(11, 22, 36, 0.08);
 }
 
+.skill-card p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
 .skill-card h3 {
     margin-bottom: 16px;
+}
+
+.skill-card .txt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.skill-card h4 {
+    margin-bottom: 12px;
+    color: var(--ink-soft);
 }
 
 .tag-list {
@@ -331,6 +512,7 @@ h3 {
     background: var(--accent);
     border-color: var(--accent);
     color: #ffffff;
+    box-shadow: 0 10px 20px rgba(17, 52, 91, 0.18);
 }
 
 .skill-btn:focus-visible {
@@ -399,6 +581,18 @@ h3 {
     flex-direction: column;
     gap: 18px;
     box-shadow: 0 12px 25px rgba(11, 22, 36, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent)
 }
 
 .project-card p {
@@ -428,13 +622,26 @@ h3 {
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 18px;
-    padding: 20px 24px;
+    padding: 20px 24px 20px 30px;
     display: flex;
     flex-direction: column;
     gap: 6px;
-    max-width: 520px;
+    max-width: 640px;
     box-shadow: 0 10px 22px rgba(11, 22, 36, 0.08);
     margin: 20px 0;
+    position: relative;
+}
+
+.education-card::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    bottom: 12px;
+    width: 4px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--accent), #1e5f8a);
+    opacity: 0.75;
 }
 
 .education-card .time {
@@ -460,11 +667,18 @@ h3 {
     font-weight: 600;
     color: var(--ink-soft);
     box-shadow: 0 8px 18px rgba(11, 22, 36, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(14, 49, 86, 0.25);
+    box-shadow: 0 14px 26px rgba(11, 22, 36, 0.12);
 }
 
 .message-card {
     margin-top: 20px;
-    background: var(--card);
+    background: linear-gradient(180deg, #ffffff, #f8fbff);
     border: 1px solid var(--line);
     border-radius: 16px;
     padding: 18px 20px;
@@ -473,6 +687,30 @@ h3 {
     gap: 6px;
     color: var(--ink-soft);
     box-shadow: 0 8px 18px rgba(11, 22, 36, 0.06);
+}
+
+.header-card,
+.callout,
+.about-card,
+.skill-card,
+.project-card,
+.education-card,
+.contact-card,
+.message-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.header-card:hover,
+.callout:hover,
+.about-card:hover,
+.skill-card:hover,
+.project-card:hover,
+.education-card:hover,
+.contact-card:hover,
+.message-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(17, 52, 91, 0.25);
 }
 
 .message-card h4 {
@@ -531,7 +769,9 @@ h3 {
 }
 
 .footer {
-    margin-top: 64px;
+    margin-top: 70px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
     font-size: 0.85rem;
     color: var(--muted);
     text-align: center;
@@ -551,6 +791,19 @@ h3 {
 @media (max-width: 900px) {
     .header-card {
         grid-template-columns: 1fr;
+    }
+
+    .header-card::after {
+        right: -220px;
+        top: -220px;
+    }
+
+    .nav {
+        justify-content: center;
+    }
+
+    .nav-list {
+        justify-content: center;
     }
 
     .section-header {

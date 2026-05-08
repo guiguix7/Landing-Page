@@ -21,15 +21,17 @@
     <title>Gui - Desenvolvedor Frontend</title>
 </head>
 
-<body>
+<body onload="SoftSkills()">
     <div class="page">
         <header class="site-header">
             <div class="header-card reveal">
                 <div class="avatar" role="img" aria-label="Avatar minimalista com iniciais">GA</div>
                 <div class="header-text">
                     <p class="eyebrow">Currículo Web</p>
-                    <h1>Guilherme Andraz - Desenvolvedor Frontend</h1>
-                    <p class="role">HTML • CSS • JavaScript</p>
+                    <h1>Guilherme Andraz - <br>
+                        Desenvolvedor Frontend</h1>
+                    <p class="role">HTML • CSS • JavaScript • API • Frontend • Frameworks • Banco de Dados</p>
+                    <p class="role">16 Anos • Salto SP • Remoto</p>
                     <div class="cta-row">
                         <a class="btn primary" href="Assets/cv-guilherme-andraz.pdf" download>Baixar Currículo</a>
                         <a class="btn ghost github" href="https://github.com/guiguix7" target="_blank"
@@ -37,28 +39,37 @@
                         <a class="btn ghost linkedin" href="https://www.linkedin.com/in/guilhermeandraz/"
                             target="_blank" rel="noopener noreferrer"><img src="Assets/IMG/linkedin.png"
                                 alt="Icone do LinkedIn">LinkedIn</a>
-                        <a class="btn ghost whatsapp" href="https://wa.me/5511934154282" target="_blank"
-                            rel="noopener noreferrer"><img src="Assets/IMG/whatsapp.png"
-                                alt="Icone do WhatsApp">WhatsApp</a>
-                        <a class="btn ghost instagram" href="https://www.instagram.com/guiguix7/" target="_blank"
-                            rel="noopener noreferrer"><img src="Assets/IMG/instagram.png"
-                                alt="Icone do Instagram">Instagram</a>
-                        <a class="btn ghost email" href="mailto:guilhermeandraz@gmail.com" target="_blank"
-                            rel="noopener noreferrer"><img src="Assets/IMG/o-email.png" alt="Icone do Email">Email</a>
                     </div>
+                </div>
+                <hr class="divider">
+                <div class="nav">
+                    <nav role="navigation" aria-label="Menu de navegação">
+                        <ul class="nav-list">
+                            <li><a href="#resumo">Resumo Profissional</a></li>
+                            <li><a href="#objetivos">Objetivos</a></li>
+                            <li><a href="#skills">Habilidades</a></li>
+                            <li><a href="#projetos">Projetos</a></li>
+                            <li><a href="#sobre">Sobre</a></li>
+                            <li><a href="#formacao">Formação</a></li>
+                            <li><a href="#contato">Contato</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </header>
 
         <main>
-            <section class="section" id="sobre">
+            <section class="section" id="resumo">
                 <div class="section-header">
                     <h2>Resumo Profissional</h2>
                 </div>
                 <div class="callout reveal">
-                    Estudante de Análise e Desenvolvimento de Sistemas focado em frontend. Experiência pessoal prática
+                    Estudante de <strong>Análise e Desenvolvimento de Sistemas (ADS)</strong> focado em frontend.
+                    Experiência pessoal prática
                     com
-                    criação de sites. Buscando oportunidades para aplicar conhecimentos em projetos reais e evoluir
+                    criação de sites (este site eu mesmo criei). Buscando oportunidades <strong>remotas</strong> para
+                    aplicar conhecimentos em
+                    projetos reais e evoluir
                     tecnicamente.
                 </div>
             </section>
@@ -68,67 +79,119 @@
                     <h2>Objetivos</h2>
                 </div>
                 <div class="callout reveal">
-                    <p>Busco oportunidades de estágio para aplicar meus conhecimentos em desenvolvimento frontend e
-                        contribuir para projetos inovadores.</p>
+                    <p>Busco oportunidades de <strong>trabalho remoto</strong> para aplicar meus conhecimentos em
+                        desenvolvimento frontend, ganhar experiência prática e
+                        contribuir para projetos.</p>
                 </div>
             </section>
 
             <section class="section" id="skills">
                 <div class="section-header">
                     <h2>Minhas Habilidades</h2>
-                    <p>Direto ao ponto: o que eu já uso no dia a dia de estudo e projetos.</p>
+                    <p>O que eu já uso sei e o que uso.</p>
                 </div>
                 <div class="skills-grid">
                     <div class="skill-card reveal">
                         <h3>Hard Skills</h3>
-                        <p>Clique na skill para ver mais detalhes</p>
+                        <p><strong>Clique</strong> na skill para ver mais detalhes</p>
                         <ul class="tag-list" id="skill-list">
-                            <li>
-                                <button type="button" class="skill-btn" onclick="logica()" id="logica">Lógica de
+                            <li><!-- Conhecimentos Gerais -->
+                                <button type="button" class="skill-btn" data-skill="Logica" onclick="logica()"
+                                    id="logica" name="btn-skils">Lógica de
                                     Programação
                                 </button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="Git">Git</button>
+                            <li><!-- Conhecimentos Gerais -->
+                                <button type="button" class="skill-btn" data-skill="Inglês" onclick="Ingles()"
+                                    id="Inglês" name="btn-skils">Inglês</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="GitHub">GitHub</button>
+                            <li><!-- Conhecimentos Gerais -->
+                                <button type="button" class="skill-btn" data-skill="Git" onclick="Git()" id="git"
+                                    name="btn-skils">Git</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="Vercel">Vercel</button>
+                            <li><!-- Conhecimentos Gerais -->
+                                <button type="button" class="skill-btn" data-skill="GitHub" onclick="GitHub()"
+                                    id="github" name="btn-skils">GitHub</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="HTML">HTML</button>
+                            <li><!-- Conhecimentos Gerais -->
+                                <button type="button" class="skill-btn" data-skill="Vercel" onclick="Vercel()"
+                                    id="vercel" name="btn-skils">Vercel</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="CSS">CSS</button>
+                            <li><!-- Conhecimentos Gerais -->
+                                <button type="button" class="skill-btn" data-skill="Vercel" onclick="AWS()"
+                                    id="aws" name="btn-skils">AWS</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="JavaScript">JavaScript</button>
+                            <li><!-- Front-end -->
+                                <button type="button" class="skill-btn" data-skill="HTML" onclick="HTML()" id="HTML"
+                                    name="btn-skils">HTML</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="React">React</button>
+                            <li><!-- Front-end -->
+                                <button type="button" class="skill-btn" data-skill="CSS" onclick="CSS()" id="CSS"
+                                    name="btn-skils">CSS</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="Node.js">Node.js</button>
+                            <li><!-- Front-end -->
+                                <button type="button" class="skill-btn" data-skill="JavaScript" onclick="JavaScript()"
+                                    id="JavaScript" name="btn-skils">JavaScript</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="APIs REST">APIs REST</button>
+                            <li><!-- Front-end -->
+                                <button type="button" class="skill-btn" data-skill="TypeScript" onclick="TypeScript()"
+                                    id="TypeScript" name="btn-skils">TypeScript</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="Frameworks">Frameworks</button>
+                            <li><!-- Back-end -->
+                                <button type="button" class="skill-btn" data-skill="CSharp" onclick="CSharp()"
+                                    id="CSharp" name="btn-skils">C#</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="Banco de Dados">Banco de
-                                    Dados</button>
+                            <li><!-- Back-end -->
+                                <button type="button" class="skill-btn" data-skill="React" onclick="React()" id="React"
+                                    name="btn-skils">React</button>
                             </li>
-                            <li>
-                                <button type="button" class="skill-btn" data-skill="Inglês">Inglês</button>
+                            <li><!-- Back-end -->
+                                <button type="button" class="skill-btn" data-skill="Node.js" onclick="NodeJS()"
+                                    id="Node.js" name="btn-skils">Node.js</button>
+                            </li>
+                            <li><!-- Back-end -->
+                                <button type="button" class="skill-btn" data-skill="Express.js" onclick="ExpressJS()"
+                                    id="Express.js" name="btn-skils">Express.js</button>
+                            </li>
+                            <li><!-- Back-end -->
+                                <button type="button" class="skill-btn" data-skill="APIs REST" onclick="API()"
+                                    id="APIs REST" name="btn-skils">APIs REST</button>
+                            </li>
+                            <li><!-- Frameworks -->
+                                <button type="button" class="skill-btn" data-skill="Bootstrap" onclick="Bootstrap()"
+                                    id="Bootstrap" name="btn-skils">Bootstrap</button>
+                            </li>
+                            <li><!-- Frameworks -->
+                                <button type="button" class="skill-btn" data-skill="Vue.js" onclick="VueJS()"
+                                    id="Vue.js" name="btn-skils">Vue.js</button>
+                            </li>
+                            <li><!-- Frameworks -->
+                                <button type="button" class="skill-btn" data-skill="Angular" onclick="Angular()"
+                                    id="Angular" name="btn-skils">Angular</button>
+                            </li>
+                            <li><!-- Banco de Dados -->
+                                <button type="button" class="skill-btn" data-skill="SQL" onclick="SQL()" id="SQL"
+                                    name="btn-skils">SQL</button>
+                            </li>
+                            <li><!-- Banco de Dados -->
+                                <button type="button" class="skill-btn" data-skill="MongoDB" onclick="MongoDB()"
+                                    id="MongoDB" name="btn-skils">MongoDB</button>
+                            </li>
+                            <li><!-- Banco de Dados -->
+                                <button type="button" class="skill-btn" data-skill="Firebase" onclick="Firebase()"
+                                    id="Firebase" name="btn-skils">Firebase</button>
+                            </li>
+                            <li><!-- Soft Skills -->
+                                <button type="button" class="skill-btn" data-skill="Soft Skills" onclick="SoftSkills()"
+                                    id="Soft Skills" name="btn-skils">Soft Skills</button>
                             </li>
                         </ul>
                     </div>
                     <div class="skill-card reveal" id="skill">
-                        <h3>Soft Skills</h3>
+                        <div class="txt">
+                            <h3>Soft Skills</h3>
+                            <h4>Habilidades Técnicas</h4>
+                        </div>
                         <div class="meter-list">
                             <div class="meter-item">
                                 <div class="meter-label">
@@ -159,61 +222,132 @@
                 </div>
             </section>
 
+            <section class="section" id="projetos">
+                <div class="section-header">
+                    <h2>Projetos em Destaque</h2>
+                    <p>Alguns repositórios do meu GitHub dos projetos que desenvolvi.</p>
+                </div>
+                <div class="project-grid">
+                    <article class="project-card reveal">
+                        <div class="project-meta">
+                            <h3>Garage do Edu</h3>
+                            <h4>Status: Em Desenvolvimento</h4>
+                            <p>Garage do Edu é um projeto em construção para divulgar e gerenciar a venda de carros
+                                classicos. O projeto engloba uma landing page rica em interacao, paginas de login e
+                                cadastro, um painel administrativo para gestão de estoque e um backend em Node.js
+                                responsavel por
+                                autenticacao e CRUD de carros e usuarios, o projeto tem uma base sólida para seu
+                                desenvolvimento.</p>
+                            <small>Stack: HTML, CSS, JavaScript, Node.js, MongoDB</small>
+                        </div>
+                        <div class="project-links">
+                            <a class="btn small primary" href="https://github.com/guiguix7/Garage-do-Edu" target="_blank"
+                                rel="noopener">Repositório</a>
+                        </div>
+                    </article>
+                    <article class="project-card reveal">
+                        <div class="project-meta">
+                            <h3>Help Desk</h3>
+                            <h4>Status: Em Desenvolvimento</h4>
+                            <p>Este projeto é um Help Desk em ASP.NET Core MVC (C#), focado em exibir chamados de
+                                suporte. Ele possui: Listagem de chamados com título, descrição, status code, status e
+                                data de abertura.
+                                Tela de detalhes de cada chamado.
+                                Estrutura padrão MVC com Controllers, Models, Views e assets em wwwroot.
+                                Atualmente, os chamados são mantidos em lista estática em memória (simulando banco),
+                                então o sistema funciona como uma base inicial/didática para evolução futura (CRUD
+                                completo, persistência real, autenticação etc.).</p>
+                            <small>Stack: HTML, CSS, JavaScript, C#</small>
+                        </div>
+                        <div class="project-links">
+                            <a class="btn small primary" href="https://github.com/guiguix7/HelpDesk" target="_blank"
+                                rel="noopener">Repositório</a>
+                        </div>
+                    </article>
+                    <article class="project-card reveal">
+                        <div class="project-meta">
+                            <h3>Landin Page</h3>
+                            <h4>Status: Em Desenvolvimento</h4>
+                            <p>Este é o proprio site do meu curriculo (esse site): uma landing page responsiva com
+                                animações de
+                                entrada, seções bem definidas (resumo, habilidades, projetos, formacao e contato),
+                                cards interativos e layout focado em clareza e UX, o JavaScript tem uma boa interação
+                                com o DOM, o que permite fazer interações como a seção de habilidades por exemplo.</p>
+                            <small>Stack: HTML, CSS, JavaScript</small>
+                        </div>
+                        <div class="project-links">
+                            <a class="btn small primary" href="https://github.com/guiguix7/Landing-Page" target="_blank"
+                                rel="noopener">Repositório</a>
+                        </div>
+                    </article>
+                    <article class="project-card reveal">
+                        <div class="project-meta">
+                            <h3>Easy Van</h3>
+                            <h4>Status: Em Desenvolvimento</h4>
+                            <p>EasyVan é um sistema web MVC para gerenciar o transporte de vans. A proposta é facilitar
+                                o controle de rotas, horários, passageiros e motoristas, reduzindo erros operacionais e
+                                melhorando a organização do serviço. O projeto usa o template ASP.NET Core MVC</p>
+                            <small>Stack: HTML, CSS, JavaScript, C#, TypeScript, APIs de Autenticação, SQL</small>
+                        </div>
+                        <div class="project-links">
+                            <a class="btn small primary" href="https://github.com/guiguix7/EasyVan" target="_blank"
+                                rel="noopener">Repositório</a>
+                        </div>
+                    </article>
+                </div>
+                <p class="note">Mais repositórios atualizados no GitHub.</p>
+            </section>
+
             <section class="section" id="sobre">
                 <div class="section-header">
                     <h2>Sobre Mim</h2>
-                    <p>Conheça um pouco sobre minha trajetória e interesses.</p>
+                    <p>Um pouco sobre mim e minha trajetória.</p>
                 </div>
                 <article class="about-card reveal">
                     <div class="about-content">
-                        <p>Olá! Meu nome é Guilherme Pereira Andraz, tenho 16 anos e sou estudante de Análise e
-                            Desenvolvimento de Sistemas.</p>
-                        <p>Minha paixão por tecnologia começou desde cedo, e desde então tenho me dedicado a aprender
-                            novas
-                            linguagens e frameworks. Tenho experiência em desenvolvimento web, com foco em criar
-                            soluções
-                            eficientes e modernas.</p>
+                        <p>Meu nome é <strong>Guilherme Pereira Andraz</strong>, tenho <strong>16 anos</strong> , moro
+                            em <strong>Salto - SP</strong> e sou estudante de <strong>Análise e Desenvolvimento de
+                                Sistemas (ADS)</strong>.
+                        </p>
+                        <p>Meu foco atual é aprender, estou me aprofundando em tecnologias de desenvolvimento web, e
+                            estudando linguagens Backend, atualmente estou buscando oportunidades remotas para colaborar
+                            com minhas habilidades, ganhar experiência prática e aprender com as oportunidades. Pretendo
+                            me tornar um desenvolvedor backend em breve.</p>
                     </div>
                 </article>
 
             </section>
 
-            <section class="section" id="projetos">
-                <div class="section-header">
-                    <h2>Projetos em Destaque</h2>
-                    <p>Meus Repositórios no GitHub dos projetos que desenvolvi.</p>
-                </div>
-                <div class="project-grid">
-                    <article class="project-card reveal">
-                        <div class="project-meta">
-                            <h3>API de Autenticação (Java + Spring)</h3>
-                            <p>API REST com login, registro, validação JWT e CRUD de usuários. Banco relacional. Testes
-                                básicos. Deploy simples.</p>
-                            <small>Stack: Java, Spring, SQL, JWT</small>
-                        </div>
-                        <div class="project-links">
-                            <a class="btn small ghost" href="https://github.com/seu-usuario" target="_blank"
-                                rel="noopener">GitHub</a>
-                            <a class="btn small primary" href="https://example.com" target="_blank"
-                                rel="noopener">Demo</a>
-                        </div>
-                    </article>
-                </div>
-                <p class="note">Mais estudos e repositórios atualizados no GitHub.</p>
-            </section>
-
             <section class="section" id="formacao">
                 <div class="section-header">
                     <h2>Formação</h2>
+                    <p>O que eu já estudei e o que estou estudando.</p>
                 </div>
+                <h2>Cursando Atualmente</h2>
+                <hr>
                 <div class="education-card reveal">
-                    <h3>Cursando Atualmente</h3>
-                    <p>Ensino Médio com Habilitação Profissional de Técnico em Desenvolvimento de Sistemas - ETEC
+                    <h3>Cursando Atualmente - Ensino Médio + Técnico</h3>
+                    <p>Ensino Médio com Habilitação Profissional de Técnico em Análise e Desenvolvimento de Sistemas -
+                        ETEC
                         Martinho de Ciero</p>
                     <span class="time">2025-2027</span>
                 </div>
                 <div class="education-card reveal">
-                    <h3>Curso Concluido</h3>
+                    <h3>Cursando Atualmente - Curso Online</h3>
+                    <p>Desenvolvendo em React.js - TIC em trilhas | Venturus</p>
+                    <span class="time">Conclusão estimada: 2026</span>
+                </div>
+                <div class="education-card reveal">
+                    <h3>Cursando Atualmente - Extracurricular</h3>
+                    <p>Extracurricular de Pacote Office, Excel, Educação Financeira, PNL, Gestão de Carreiras, Libras |
+                        ITEMM</p>
+                    <span class="time">Conclusão estimada: 2026</span>
+                </div>
+
+                <h2>Formação Concluída</h2>
+                <hr>
+                <div class="education-card reveal">
+                    <h3>Curso Concluido - Curso Online</h3>
                     <p>Lógica de Programação Web - TIC em trilhas | Venturus</p>
                     <span class="time">2025</span>
                     <a class="btn primary"
@@ -221,12 +355,25 @@
                         rel="noopener">Exibir Certificado</a>
                 </div>
                 <div class="education-card reveal">
-                    <h3>Curso Concluido</h3>
+                    <h3>Curso Concluido - Curso Online</h3>
                     <p>Fundamentos de Desenvolvimento Web - TIC em trilhas | Venturus</p>
                     <span class="time">2025</span>
                     <a class="btn primary"
                         href="Assets/PDF/Guilherme Pereira Andraz - Fundamentos de Desenvolvimento Web .pdf"
                         target="_blank" rel="noopener">Exibir Certificado</a>
+                </div>
+                <div class="education-card reveal">
+                    <h3>Ensino Fundamental Concluido - Ensino Fundamental I & II</h3>
+                    <p>Ensino Fundamental - CEUNSP Salto</p>
+                    <span class="time">2024</span>
+                </div>
+                <h2>Pretendo Cursar</h2>
+                <hr>
+                <div class="education-card reveal">
+                    <h3>Graduação em Análise e Desenvolvimento de Sistemas</h3>
+                    <p>FATEC</p>
+                    <span class="time">Inicio estimado: 2028</span>
+                    <span class="time">Conclusão estimada: 2030</span>
                 </div>
             </section>
 
@@ -269,6 +416,18 @@
 
         <footer class="footer">
             <p>&copy; 2026 Guilherme Andraz - Todos os direitos reservados.</p>
+            <div class="cta-row-footer">
+                <a class="btn ghost github" href="https://github.com/guiguix7" target="_blank"
+                    rel="noopener noreferrer"><img src="Assets/IMG/github.png" alt="Icone do GitHub">GitHub</a>
+                <a class="btn ghost linkedin" href="https://www.linkedin.com/in/guilhermeandraz/" target="_blank"
+                    rel="noopener noreferrer"><img src="Assets/IMG/linkedin.png" alt="Icone do LinkedIn">LinkedIn</a>
+                <a class="btn ghost whatsapp" href="https://wa.me/5511934154282" target="_blank"
+                    rel="noopener noreferrer"><img src="Assets/IMG/whatsapp.png" alt="Icone do WhatsApp">WhatsApp</a>
+                <a class="btn ghost instagram" href="https://www.instagram.com/guiguix7/" target="_blank"
+                    rel="noopener noreferrer"><img src="Assets/IMG/instagram.png" alt="Icone do Instagram">Instagram</a>
+                <a class="btn ghost email" href="mailto:guilhermeandraz@gmail.com" target="_blank"
+                    rel="noopener noreferrer"><img src="Assets/IMG/o-email.png" alt="Icone do Email">Email</a>
+            </div>
         </footer>
     </div>
 
