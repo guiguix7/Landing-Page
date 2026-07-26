@@ -31,7 +31,7 @@
     <title>Gui - Desenvolvedor Frontend</title>
   </head>
 
-  <body onload="SoftSkills()" id="site">
+  <body onload="(SoftSkills(), changelanguage_por('pt'))" id="site">
     <div class="page">
       <header class="site-header">
         <div class="header-card reveal">
@@ -45,9 +45,9 @@
           <div class="header-linehead">
             <div class="header-text">
               <div class="start">
-                <p class="eyebrow">Currículo Web</p>
-                <p class="eyebrow">-</p>
-                <p class="eyebrow brasil">Brasil</p>
+                <p class="eyebrow" id="eyebrow"></p>
+                <p class="eyebrow" id="eyebrow_separator"></p>
+                <p class="eyebrow brasil" id="eyebrow_brasil"></p>
                 <div class="theme">
                   <button
                     class="btn ghost theme-toggle"
@@ -65,50 +65,49 @@
                 </div>
               </div>
             </div>
-            <h1>
-              Guilherme Andraz - <br />
-              Desenvolvedor Frontend
-            </h1>
-            <p class="role">
-              HTML • CSS • JavaScript • API • Frontend • Frameworks • Banco de
-              Dados
+            <h1 id="title"></h1>
+            <p class="role" id="role">
             </p>
-            <p class="role">16 Anos • Salto SP • Remoto</p>
+            <p class="role" id="role2"></p>
             <div class="cta-row">
               <a
                 class="btn primary"
                 href="Assets/cv-guilherme-andraz.pdf"
                 download
-                >Baixar Currículo</a
+                id="download"
+                ></a
               >
               <a
                 class="btn ghost github"
                 href="https://github.com/guiguix7"
                 target="_blank"
                 rel="noopener noreferrer"
+                id="header_github"
                 ><img
                   src="Assets/IMG/github.png"
                   alt="Icone do GitHub"
-                />GitHub</a
+                />/a
               >
               <a
                 class="btn ghost linkedin"
                 href="https://www.linkedin.com/in/guilhermeandraz/"
                 target="_blank"
                 rel="noopener noreferrer"
+                id="header_linkedin"
                 ><img
                   src="Assets/IMG/linkedin.png"
                   alt="Icone do LinkedIn"
-                />LinkedIn</a
+                /></a
               >
               <span>|</span>
               <div class="languade" role="group" aria-label="Seleção de idioma">
                 <button
                   type="button"
                   class="btn ghost lang-btn is-active"
+                  id="lang_pt_btn"
                   data-lang="pt"
                   aria-pressed="true"
-                  onclick="changeLanguage('pt')"
+                  onclick="(changeLanguage('pt'), changelanguage_por(pt_br))"
                 >
                   Português
                   <img src="./Assets/IMG/brasil.png" alt="" />
@@ -116,30 +115,31 @@
                 <button
                   type="button"
                   class="btn ghost lang-btn"
+                  id="lang_en_btn"
                   data-lang="en"
                   aria-pressed="false"
-                  onclick="changeLanguage('en')"
+                  onclick="(changeLanguage('en'), changelanguage_eng(eng))"
                 >
                   English
                   <img src="./Assets/IMG/estados-unidos.png" alt="" />
                 </button>
               </div>
             </div>
-            <hr class="divider" />
-            <div class="nav">
-              <nav role="navigation" aria-label="Menu de navegação">
+        </div>
+        <hr class="divider" />
+        <div class="nav">
+            <nav role="navigation" aria-label="Menu de navegação">
                 <ul class="nav-list">
-                  <li><a href="#resumo">Resumo Profissional</a></li>
-                  <li><a href="#objetivos">Objetivos</a></li>
-                  <li><a href="#skills">Habilidades</a></li>
-                  <li><a href="#projetos">Projetos</a></li>
-                  <li><a href="#sobre">Sobre</a></li>
-                  <li><a href="#formacao">Formação</a></li>
-                  <li><a href="#contato">Contato</a></li>
+                    <li><a href="#resumo" id="li1"></a></li>
+                    <li><a href="#objetivos" id="li2"></a></li>
+                    <li><a href="#skills" id="li3"></a></li>
+                    <li><a href="#projetos" id="li4"></a></li>
+                    <li><a href="#sobre" id="li5"></a></li>
+                    <li><a href="#formacao" id="li6"></a></li>
+                    <li><a href="#contato" id="li7"></a></li>
                 </ul>
-              </nav>
-            </div>
-          </div>
+            </nav>
+        </div>
         </div>
       </header>
 
@@ -147,31 +147,21 @@
         <!-- Seção de Resumo Profissional -->
         <section class="section" id="resumo">
           <div class="section-header reveal">
-            <h2>Resumo Profissional</h2>
+            <h2 id="title_summary"></h2>
           </div>
           <div class="callout reveal">
-            Estudante de
-            <strong>Análise e Desenvolvimento de Sistemas (ADS)</strong> focado
-            em <strong>desenvolvimento frontend</strong>. Experiência pessoal
-            prática com criação de sites (como este). Buscando oportunidades
-            <strong>remotas</strong> para aplicar meus conhecimentos em projetos
-            reais e evoluir tecnicamente.
+            <p id="summary_content">
+            </p>
           </div>
         </section>
 
         <!-- Seção de Objetivos -->
         <section class="section" id="objetivos">
           <div class="section-header reveal">
-            <h2>Objetivos</h2>
+            <h2 id="title_objective"></h2>
           </div>
           <div class="callout reveal">
-            <p>
-              Meu Principal objetivo é <strong>aprender</strong>, primeiramente
-              como desenvolvedor frontend, para ampliar meus conhecimentos,
-              <strong>ganhar experiência prática</strong> e contribuir para
-              projetos. Futuramente, desejo me tornar um profissional completo,
-              <strong>desenvolver em backend</strong>
-              e ser capaz de desenvolver soluções web eficientes.
+            <p id="objective_content">
             </p>
           </div>
         </section>
@@ -179,15 +169,13 @@
         <!-- Seção de Habilidades -->
         <section class="section" id="skills">
           <div class="section-header reveal">
-            <h2>Minhas Habilidades</h2>
-            <p>O que eu já uso sei e o que uso.</p>
+            <h2 id="title_skills"></h2>
+            <p id="subtitle_skills"></p>
           </div>
           <div class="skills-grid">
             <div class="skill-card reveal">
-              <h3>Hard Skills</h3>
-              <p>
-                <strong>Clique</strong> na <strong>skill</strong> para ver mais
-                detalhes
+              <h3 id="skills_hard_title"></h3>
+              <p id="skills_hard_hint">
               </p>
               <ul class="tag-list" id="skill-list">
                 <li>
@@ -334,45 +322,6 @@
                   </button>
                 </li>
                 <li>
-                  <!-- Front/Back -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Next.js"
-                    onclick="NextJS()"
-                    id="Next.js"
-                    name="btn-skils"
-                  >
-                    Next.js
-                  </button>
-                </li>
-                <li>
-                  <!-- Frameworks -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Vue.js"
-                    onclick="VueJS()"
-                    id="Vue.js"
-                    name="btn-skils"
-                  >
-                    Vue.js
-                  </button>
-                </li>
-                <li>
-                  <!-- Frameworks -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Angular"
-                    onclick="Angular()"
-                    id="Angular"
-                    name="btn-skils"
-                  >
-                    Angular
-                  </button>
-                </li>
-                <li>
                   <!-- Frameworks -->
                   <button
                     type="button"
@@ -422,19 +371,6 @@
                     name="btn-skils"
                   >
                     Node.js
-                  </button>
-                </li>
-                <li>
-                  <!-- Back-end -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Express.js"
-                    onclick="ExpressJS()"
-                    id="Express.js"
-                    name="btn-skils"
-                  >
-                    Express.js
                   </button>
                 </li>
                 <li>
@@ -519,14 +455,14 @@
             </div>
             <div class="skill-card reveal" id="skill">
               <div class="txt">
-                <h3>Soft Skills</h3>
-                <h4>Habilidades Técnicas</h4>
+                <h3 id="skills_soft_title">Soft Skills</h3>
+                <h4 id="skills_soft_subtitle">Habilidades Técnicas</h4>
               </div>
               <div class="meter-list">
                 <div class="meter-item">
                   <div class="meter-label">
-                    <span>Organização</span>
-                    <span>86%</span>
+                    <span id="soft_organization_label">Organização</span>
+                    <span id="soft_organization_value">86%</span>
                   </div>
                   <div
                     class="meter-bar"
@@ -539,8 +475,8 @@
                 </div>
                 <div class="meter-item">
                   <div class="meter-label">
-                    <span>Aprendizado rápido</span>
-                    <span>82%</span>
+                    <span id="soft_fastlearning_label">Aprendizado rápido</span>
+                    <span id="soft_fastlearning_value">82%</span>
                   </div>
                   <div
                     class="meter-bar"
@@ -553,8 +489,8 @@
                 </div>
                 <div class="meter-item">
                   <div class="meter-label">
-                    <span>Autonomia</span>
-                    <span>78%</span>
+                    <span id="soft_autonomy_label">Autonomia</span>
+                    <span id="soft_autonomy_value">78%</span>
                   </div>
                   <div
                     class="meter-bar"
@@ -573,28 +509,20 @@
         <!-- Seção de Projetos -->
         <section class="section" id="projetos">
           <div class="section-header reveal">
-            <h2>Projetos em Destaque</h2>
-            <p>
-              Alguns repositórios do meu GitHub dos projetos que desenvolvi.
+            <h2 id="title_projects"></h2>
+            <p id="subtitle_projects">
             </p>
           </div>
           <div class="project-grid">
             <article class="project-card reveal">
               <div class="project-meta">
-                <h3>Garage do Edu</h3>
-                <h4>Status: Em Desenvolvimento</h4>
-                <p>
-                  Garage do Edu é um projeto em construção para divulgar e
-                  gerenciar a venda de carros classicos. O projeto engloba uma
-                  landing page rica em interacao, paginas de login e cadastro,
-                  um painel administrativo para gestão de estoque e um backend
-                  em Node.js responsavel por autenticacao e CRUD de carros e
-                  usuarios, o projeto tem uma base sólida para seu
-                  desenvolvimento.
+                <!-- Garage do Edu -->
+                <h3 id="project1_title"></h3>
+                <h4 id="project1_status"></h4>
+                <p id="project1_content">
                 </p>
-                <small
-                  >Stack: HTML, CSS, JavaScript, Node.js, Express,
-                  MongoDB</small
+                <small id="project1_stack"
+                  ></small
                 >
               </div>
               <div class="project-links">
@@ -603,26 +531,20 @@
                   href="https://github.com/guiguix7/Garage-do-Edu"
                   target="_blank"
                   rel="noopener"
-                  >Repositório</a
+                  id="project1_link"
+                  ></a
                 >
               </div>
             </article>
             <article class="project-card reveal">
               <div class="project-meta">
-                <h3>Help Desk</h3>
-                <h4>Status: Em Desenvolvimento</h4>
-                <p>
-                  Este projeto é um Help Desk em ASP.NET Core MVC (C#), focado
-                  em exibir chamados de suporte. Ele possui: Listagem de
-                  chamados com título, descrição, status code, status e data de
-                  abertura. Tela de detalhes de cada chamado. Estrutura padrão
-                  MVC com Controllers, Models, Views e assets em wwwroot.
-                  Atualmente, os chamados são mantidos em lista estática em
-                  memória (simulando banco), então o sistema funciona como uma
-                  base inicial/didática para evolução futura (CRUD completo,
-                  persistência real, autenticação etc.).
+                <!-- Help Desk -->
+                <h3 id="project2_title"></h3>
+                <h4 id="project2_status"></h4>
+                <p id="project2_content">
                 </p>
-                <small>Stack: HTML, CSS, JavaScript, C#</small>
+                <small id="project2_stack"></small
+                >
               </div>
               <div class="project-links">
                 <a
@@ -630,23 +552,19 @@
                   href="https://github.com/guiguix7/HelpDesk"
                   target="_blank"
                   rel="noopener"
-                  >Repositório</a
+                  id="project2_link"
+                  ></a
                 >
               </div>
             </article>
             <article class="project-card reveal">
               <div class="project-meta">
-                <h3>Landing Page</h3>
-                <h4>Status: Em Desenvolvimento</h4>
-                <p>
-                  Este é o proprio site do meu curriculo (esse site): uma
-                  landing page responsiva com animações de entrada, seções bem
-                  definidas (resumo, habilidades, projetos, formacao e contato),
-                  cards interativos e layout focado em clareza e UX, o
-                  JavaScript tem uma boa interação com o DOM, o que permite
-                  fazer interações como a seção de habilidades por exemplo.
+                <!-- Landing Page -->
+                <h3 id="project3_title"></h3>
+                <h4 id="project3_status"></h4>
+                <p id="project3_content">
                 </p>
-                <small>Stack: HTML, CSS, JavaScript</small>
+                <small id="project3_stack"></small>
               </div>
               <div class="project-links">
                 <a
@@ -654,24 +572,19 @@
                   href="https://github.com/guiguix7/Landing-Page"
                   target="_blank"
                   rel="noopener"
-                  >Repositório</a
+                  id="project3_link"
+                  ></a
                 >
               </div>
             </article>
             <article class="project-card reveal">
               <div class="project-meta">
-                <h3>Easy Van</h3>
-                <h4>Status: Em Desenvolvimento</h4>
-                <p>
-                  EasyVan é um sistema web MVC para gerenciar o transporte de
-                  vans. A proposta é facilitar o controle de rotas, horários,
-                  passageiros e motoristas, reduzindo erros operacionais e
-                  melhorando a organização do serviço. O projeto usa o template
-                  ASP.NET Core MVC
+                <!-- Easy Van -->
+                <h3 id="project4_title"></h3>
+                <h4 id="project4_status"></h4>
+                <p id="project4_content">
                 </p>
-                <small
-                  >Stack: HTML, CSS, JavaScript, C#, TypeScript, APIs de
-                  Autenticação, SQL</small
+                <small id="project4_stack"></small
                 >
               </div>
               <div class="project-links">
@@ -680,35 +593,25 @@
                   href="https://github.com/guiguix7/EasyVan"
                   target="_blank"
                   rel="noopener"
-                  >Repositório</a
+                  id="project4_link"
+                  ></a
                 >
               </div>
             </article>
           </div>
-          <p class="note reveal">Mais repositórios atualizados no GitHub.</p>
+          <p class="note reveal" id="moretxt_projects">
+          </p>
         </section>
 
         <!-- Seção Sobre Mim -->
         <section class="section" id="sobre">
           <div class="section-header reveal">
-            <h2>Sobre Mim</h2>
-            <p>Um pouco sobre mim e minha trajetória.</p>
+            <h2 id="title_about"></h2>
+            <p id="subtitle_about"></p>
           </div>
           <article class="about-card reveal">
             <div class="about-content">
-              <p>
-                Meu nome é <strong>Guilherme Pereira Andraz</strong>, tenho
-                <strong>16 anos</strong> , moro em <strong>Salto - SP</strong> e
-                sou estudante de
-                <strong>Análise e Desenvolvimento de Sistemas (ADS)</strong>.
-              </p>
-              <p>
-                Meu foco atual é aprender, estou me aprofundando em tecnologias
-                de desenvolvimento web, e estudando linguagens Backend,
-                atualmente estou buscando oportunidades remotas para colaborar
-                com minhas habilidades, ganhar experiência prática e aprender
-                com as oportunidades. Pretendo me tornar um desenvolvedor
-                backend em breve.
+              <p id="about_content">
               </p>
             </div>
           </article>
@@ -717,87 +620,116 @@
         <!-- Seção Formação Acadêmica -->
         <section class="section reveal" id="formacao">
           <div class="section-header reveal">
-            <h2>Formação Acadêmica</h2>
-            <p>O que eu já estudei e o que estou estudando.</p>
+            <h2 id="title_formation"></h2>
+            <p id="subtitle_formation">
+            </p>
           </div>
-          <h2 class="reveal">Cursando Atualmente</h2>
+          <h2 class="reveal" id="title_formation_current">
+          </h2>
           <hr />
           <div class="education-card reveal">
-            <h3>Cursando Atualmente - Ensino Médio + Técnico</h3>
-            <p>
-              Ensino Médio com Habilitação Profissional de Técnico em Análise e
-              Desenvolvimento de Sistemas - ETEC Martinho de Ciero
+            <h3 id="formation_current_1_title">
+            </h3>
+            <p id="formation_current_1_text">
             </p>
-            <span class="time">2025-2027</span>
+            <span class="time" id="formation_current_1_time"></span>
           </div>
           <div class="education-card reveal">
-            <h3>Cursando Atualmente - Curso Online</h3>
-            <p>Desenvolvendo em React.js - TIC em trilhas | Venturus</p>
-            <span class="time">Conclusão estimada: 2026</span>
-          </div>
-          <div class="education-card reveal">
-            <h3>Cursando Atualmente - Extracurricular</h3>
-            <p>
-              Extracurricular de Pacote Office, Excel, Educação Financeira, PNL,
-              Gestão de Carreiras, Libras | ITEMM
+            <h3 id="formation_current_2_title">
+            </h3>
+            <p id="formation_current_2_text">
             </p>
-            <span class="time">Conclusão estimada: 2026</span>
+            <span class="time" id="formation_current_2_time"
+              ></span
+            >
           </div>
-
-          <h2 class="reveal">Formação Concluída</h2>
+          
+          <h2 class="reveal" id="title_formation_done"></h2>
           <hr />
           <div class="education-card reveal">
-            <h3>Curso Concluido - Curso Online</h3>
-            <p>Lógica de Programação Web - TIC em trilhas | Venturus</p>
-            <span class="time">2025</span>
+            <h3 id="formation_done_1_title"></h3>
+            <p id="formation_done_1_text">
+            </p>
+            <span class="time" id="formation_done_1_time"></span>
             <a
               class="btn primary"
               href="Assets/PDF/Guilherme Pereira Andraz - Lógica de Programação para Web.pdf"
               target="_blank"
               rel="noopener"
-              >Exibir Certificado</a
-            >
+              >
+              <div class="btn-certificate">
+                  <span id="formation_done_1_certificate">Exibir Certificado</span><img src="./Assets/IMG/new-tab.png" alt="Open in new tab icon" 
+                  class="icon new-tab" />
+                </div>
+            </a>
           </div>
           <div class="education-card reveal">
-            <h3>Curso Concluido - Curso Online</h3>
-            <p>
+            <h3 id="formation_done_2_title">Curso Concluido - Curso Online</h3>
+            <p id="formation_done_2_text">
               Fundamentos de Desenvolvimento Web - TIC em trilhas | Venturus
             </p>
-            <span class="time">2025</span>
+            <span class="time" id="formationDone3Time">2025</span>
             <a
               class="btn primary"
               href="Assets/PDF/Guilherme Pereira Andraz - Fundamentos de Desenvolvimento Web .pdf"
               target="_blank"
               rel="noopener"
+              id="formation_done_2_certificate"
               >Exibir Certificado</a
             >
           </div>
           <div class="education-card reveal">
-            <h3>Ensino Fundamental Concluido - Ensino Fundamental I & II</h3>
-            <p>Ensino Fundamental - CEUNSP Salto</p>
-            <span class="time">2024</span>
+            <h3 id="formation_done_3_title">
+              Curso Concluido - Extracurricular
+            </h3>
+            <p id="formation_current_3_text">
+              Extracurricular de Pacote Office, Excel, Educação Financeira, PNL,
+              Gestão de Carreiras, Libras | ITEMM
+            </p>
+            <span class="time" id="formation_done_3_time">2025</span>
+            <a
+              class="btn primary"
+              href="Assets/PDF/certificado ITEMM.pdf"
+              target="_blank"
+              rel="noopener"
+              id="formation_done_3_certificate"
+              >Exibir Certificado</a
+            >
           </div>
-          <h2>Pretendo Cursar</h2>
+          <div class="education-card reveal">
+            <h3 id="formation_done_4_title">
+              Ensino Fundamental Concluido - Ensino Fundamental I & II
+            </h3>
+            <p id="formation_done_4_text">Ensino Fundamental - CEUNSP Salto</p>
+            <span class="time" id="formation_done_4_time">2024</span>
+          </div>
+          <h2 id="title_formation_future">Pretendo Cursar</h2>
           <hr />
           <div class="education-card reveal">
-            <h3>Graduação em Análise e Desenvolvimento de Sistemas</h3>
-            <p>FATEC</p>
-            <span class="time">Inicio estimado: 2028</span>
-            <span class="time">Conclusão estimada: 2030</span>
+              <h3 id="formation_future_1_title">
+                  Graduação em Análise e Desenvolvimento de Sistemas
+            </h3>
+            <p id="formation_future_1_text">FATEC</p>
+            <span class="time" id="formation_future_1_start"
+              >Inicio estimado: 2028</span
+            >
+            <span class="time" id="formation_future_1_end"
+              >Conclusão estimada: 2030</span
+            >
           </div>
         </section>
 
         <!-- Seção de Contato -->
         <section class="section" id="contato">
           <div class="section-header reveal">
-            <h2>Contato</h2>
+            <h2 id="title_contact">Contato</h2>
           </div>
           <div class="message-card reveal">
-            <h4>
+            <h4 id="contact_invite">
               Sinta-se à vontade para me enviar uma mensagem aqui pelo site,
               ficarei feliz em responder!
             </h4>
-            <p>Minha API me entragará sua mensagem</p>
+            <p id="contact_note">Minha API me entragará sua mensagem</p>
             <form action="POST">
               <input type="text" name="name" placeholder="Seu nome" required />
               <input
@@ -812,7 +744,9 @@
                 placeholder="Sua mensagem"
                 required
               ></textarea>
-              <button class="btn primary" type="submit">Enviar Mensagem</button>
+              <button class="btn primary" type="submit" id="contact_submit">
+                Enviar Mensagem
+              </button>
             </form>
           </div>
         </section>
@@ -820,13 +754,16 @@
 
       <!-- Seção de Footer -->
       <footer class="footer reveal">
-        <p>&copy; 2026 Guilherme Andraz - Todos os direitos reservados.</p>
+        <p id="footer_copyright">
+          &copy; 2026 Guilherme Andraz - Todos os direitos reservados.
+        </p>
         <div class="cta-row-footer">
           <a
             class="btn ghost github"
             href="https://github.com/guiguix7"
             target="_blank"
             rel="noopener noreferrer"
+            id="footer_github"
             ><img src="Assets/IMG/github.png" alt="Icone do GitHub" />GitHub</a
           >
           <a
@@ -834,6 +771,7 @@
             href="https://www.linkedin.com/in/guilhermeandraz/"
             target="_blank"
             rel="noopener noreferrer"
+            id="footer_linkedin"
             ><img
               src="Assets/IMG/linkedin.png"
               alt="Icone do LinkedIn"
@@ -844,6 +782,7 @@
             href="https://wa.me/5511934154282"
             target="_blank"
             rel="noopener noreferrer"
+            id="footer_whatsapp"
             ><img
               src="Assets/IMG/whatsapp.png"
               alt="Icone do WhatsApp"
@@ -854,6 +793,7 @@
             href="https://www.instagram.com/guiguix7/"
             target="_blank"
             rel="noopener noreferrer"
+            id="footer_instagram"
             ><img
               src="Assets/IMG/instagram.png"
               alt="Icone do Instagram"
@@ -864,6 +804,7 @@
             href="mailto:guilhermeandraz@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
+            id="footer_email"
             ><img src="Assets/IMG/o-email.png" alt="Icone do Email" />Email</a
           >
         </div>
@@ -871,17 +812,6 @@
     </div>
 
     <script src="./JS/script.js" defer></script>
-
-    <script>
-      function changeLanguage(lang) {
-        const buttons = document.querySelectorAll(".lang-btn");
-
-        buttons.forEach((button) => {
-          const isActive = button.dataset.lang === lang;
-          button.classList.toggle("is-active", isActive);
-          button.setAttribute("aria-pressed", isActive ? "true" : "false");
-        });
-      }
-    </script>
+    <script src="./JS/lang.js" defer></script>
   </body>
 </html>

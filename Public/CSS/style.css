@@ -263,6 +263,15 @@ ul {
   align-items: center;
 }
 
+.btn-certificate {
+  gap: 8px;
+}
+
+.icon.new-tab {
+  width: 14px;
+  height: 14px;
+}
+
 .theme {
   display: flex;
   justify-content: flex-end;
