@@ -48,6 +48,7 @@
                 <p class="eyebrow" id="eyebrow"></p>
                 <p class="eyebrow" id="eyebrow_separator"></p>
                 <p class="eyebrow brasil" id="eyebrow_brasil"></p>
+                <label for="theme-toggle" class="theme-label"></label>
                 <div class="theme">
                   <button
                     class="btn ghost theme-toggle"
@@ -66,39 +67,67 @@
               </div>
             </div>
             <h1 id="title"></h1>
-            <p class="role" id="role">
-            </p>
+            <p class="role" id="role"></p>
             <p class="role" id="role2"></p>
             <div class="cta-row">
-              <a
-                class="btn primary"
-                href="Assets/cv-guilherme-andraz.pdf"
-                download
-                id="download"
-                ></a
-              >
+              <div class="dropdown" id="download-dropdown">
+                <button
+                  class="btn primary dropdown-toggle"
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                >
+                  <span id="download"></span>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="ml-1"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-hidden="true">
+                  <li role="none">
+                    <a
+                      href="Assets/cv-guilherme-andraz.pdf"
+                      download
+                      class="dropdown-item"
+                      role="menuitem"
+                    >
+                      Baixar Currículo (Português)
+                    </a>
+                  </li>
+                  <li role="none">
+                    <a
+                      href="Assets/cv-guilherme-andraz.md"
+                      download
+                      class="dropdown-item"
+                      role="menuitem"
+                    >
+                      Download Curriculum (English)
+                    </a>
+                  </li>
+                </ul>
+              </div>
               <a
                 class="btn ghost github"
                 href="https://github.com/guiguix7"
                 target="_blank"
                 rel="noopener noreferrer"
-                id="header_github"
-                ><img
-                  src="Assets/IMG/github.png"
-                  alt="Icone do GitHub"
-                />/a
-              >
+                ><span id="header_github"></span
+                ><img src="Assets/IMG/github.png" alt="Icone do GitHub"
+              /></a>
               <a
                 class="btn ghost linkedin"
                 href="https://www.linkedin.com/in/guilhermeandraz/"
                 target="_blank"
                 rel="noopener noreferrer"
-                id="header_linkedin"
-                ><img
-                  src="Assets/IMG/linkedin.png"
-                  alt="Icone do LinkedIn"
-                /></a
-              >
+                ><span id="header_linkedin"></span
+                ><img src="Assets/IMG/linkedin.png" alt="Icone do LinkedIn"
+              /></a>
               <span>|</span>
               <div class="languade" role="group" aria-label="Seleção de idioma">
                 <button
@@ -125,21 +154,21 @@
                 </button>
               </div>
             </div>
-        </div>
-        <hr class="divider" />
-        <div class="nav">
+          </div>
+          <hr class="divider" />
+          <div class="nav">
             <nav role="navigation" aria-label="Menu de navegação">
-                <ul class="nav-list">
-                    <li><a href="#resumo" id="li1"></a></li>
-                    <li><a href="#objetivos" id="li2"></a></li>
-                    <li><a href="#skills" id="li3"></a></li>
-                    <li><a href="#projetos" id="li4"></a></li>
-                    <li><a href="#sobre" id="li5"></a></li>
-                    <li><a href="#formacao" id="li6"></a></li>
-                    <li><a href="#contato" id="li7"></a></li>
-                </ul>
+              <ul class="nav-list">
+                <li><a href="#resumo" id="li1"></a></li>
+                <li><a href="#objetivos" id="li2"></a></li>
+                <li><a href="#skills" id="li3"></a></li>
+                <li><a href="#projetos" id="li4"></a></li>
+                <li><a href="#sobre" id="li5"></a></li>
+                <li><a href="#formacao" id="li6"></a></li>
+                <li><a href="#contato" id="li7"></a></li>
+              </ul>
             </nav>
-        </div>
+          </div>
         </div>
       </header>
 
@@ -150,8 +179,9 @@
             <h2 id="title_summary"></h2>
           </div>
           <div class="callout reveal">
-            <p id="summary_content">
-            </p>
+            <p id="summary_content"></p>
+            <br />
+            <p id="summary_content2"></p>
           </div>
         </section>
 
@@ -161,8 +191,9 @@
             <h2 id="title_objective"></h2>
           </div>
           <div class="callout reveal">
-            <p id="objective_content">
-            </p>
+            <p id="objective_content"></p>
+            <br />
+            <p id="objective_content2"></p>
           </div>
         </section>
 
@@ -175,8 +206,7 @@
           <div class="skills-grid">
             <div class="skill-card reveal">
               <h3 id="skills_hard_title"></h3>
-              <p id="skills_hard_hint">
-              </p>
+              <p id="skills_hard_hint"></p>
               <ul class="tag-list" id="skill-list">
                 <li>
                   <!-- Conhecimentos Gerais -->
@@ -254,6 +284,58 @@
                     name="btn-skils"
                   >
                     AWS
+                  </button>
+                </li>
+                <li>
+                  <!-- Conhecimentos Gerais -->
+                  <button
+                    type="button"
+                    class="skill-btn"
+                    data-skill="Docker"
+                    onclick="Docker()"
+                    id="docker"
+                    name="btn-skils"
+                  >
+                    Docker
+                  </button>
+                </li>
+                <li>
+                  <!-- Conhecimentos Gerais -->
+                  <button
+                    type="button"
+                    class="skill-btn"
+                    data-skill="Segurança da Informação"
+                    onclick="SegurancaDaInformacao()"
+                    id="seguranca-da-informacao"
+                    name="btn-skils"
+                  >
+                    Segurança da Informação
+                  </button>
+                </li>
+                <li>
+                  <!-- Conhecimentos Gerais -->
+                  <button
+                    type="button"
+                    class="skill-btn"
+                    data-skill="Suporte Técnico"
+                    onclick="SuporteTecnico()"
+                    id="suporte-tecnico"
+                    name="btn-skils"
+                  >
+                    Suporte Técnico
+                  </button>
+                </li>
+                <li>
+                  <!-- Conhecimentos Gerais -->
+                  <button
+                    type="button"
+                    class="skill-btn"
+                    data-skill="Tecnologia da Informação"
+                    onclick="TecnologiaDaInformacao()"
+                    id="tecnologia-da-informacao"
+                    name="btn-skils"
+                  >
+                    Tecnologia da Informação
                   </button>
                 </li>
                 <li>
@@ -510,8 +592,7 @@
         <section class="section" id="projetos">
           <div class="section-header reveal">
             <h2 id="title_projects"></h2>
-            <p id="subtitle_projects">
-            </p>
+            <p id="subtitle_projects"></p>
           </div>
           <div class="project-grid">
             <article class="project-card reveal">
@@ -519,11 +600,8 @@
                 <!-- Garage do Edu -->
                 <h3 id="project1_title"></h3>
                 <h4 id="project1_status"></h4>
-                <p id="project1_content">
-                </p>
-                <small id="project1_stack"
-                  ></small
-                >
+                <p id="project1_content"></p>
+                <small id="project1_stack"></small>
               </div>
               <div class="project-links">
                 <a
@@ -532,8 +610,7 @@
                   target="_blank"
                   rel="noopener"
                   id="project1_link"
-                  ></a
-                >
+                ></a>
               </div>
             </article>
             <article class="project-card reveal">
@@ -541,10 +618,8 @@
                 <!-- Help Desk -->
                 <h3 id="project2_title"></h3>
                 <h4 id="project2_status"></h4>
-                <p id="project2_content">
-                </p>
-                <small id="project2_stack"></small
-                >
+                <p id="project2_content"></p>
+                <small id="project2_stack"></small>
               </div>
               <div class="project-links">
                 <a
@@ -553,8 +628,7 @@
                   target="_blank"
                   rel="noopener"
                   id="project2_link"
-                  ></a
-                >
+                ></a>
               </div>
             </article>
             <article class="project-card reveal">
@@ -562,8 +636,7 @@
                 <!-- Landing Page -->
                 <h3 id="project3_title"></h3>
                 <h4 id="project3_status"></h4>
-                <p id="project3_content">
-                </p>
+                <p id="project3_content"></p>
                 <small id="project3_stack"></small>
               </div>
               <div class="project-links">
@@ -573,8 +646,7 @@
                   target="_blank"
                   rel="noopener"
                   id="project3_link"
-                  ></a
-                >
+                ></a>
               </div>
             </article>
             <article class="project-card reveal">
@@ -582,10 +654,8 @@
                 <!-- Easy Van -->
                 <h3 id="project4_title"></h3>
                 <h4 id="project4_status"></h4>
-                <p id="project4_content">
-                </p>
-                <small id="project4_stack"></small
-                >
+                <p id="project4_content"></p>
+                <small id="project4_stack"></small>
               </div>
               <div class="project-links">
                 <a
@@ -594,13 +664,11 @@
                   target="_blank"
                   rel="noopener"
                   id="project4_link"
-                  ></a
-                >
+                ></a>
               </div>
             </article>
           </div>
-          <p class="note reveal" id="moretxt_projects">
-          </p>
+          <p class="note reveal" id="moretxt_projects"></p>
         </section>
 
         <!-- Seção Sobre Mim -->
@@ -609,127 +677,111 @@
             <h2 id="title_about"></h2>
             <p id="subtitle_about"></p>
           </div>
-          <article class="about-card reveal">
+          <div class="callout reveal">
             <div class="about-content">
-              <p id="about_content">
-              </p>
+              <p id="about_content"></p>
             </div>
-          </article>
+          </div>
         </section>
 
         <!-- Seção Formação Acadêmica -->
         <section class="section reveal" id="formacao">
           <div class="section-header reveal">
             <h2 id="title_formation"></h2>
-            <p id="subtitle_formation">
-            </p>
+            <p id="subtitle_formation"></p>
           </div>
-          <h2 class="reveal" id="title_formation_current">
-          </h2>
+          <h2 class="reveal" id="title_formation_current"></h2>
           <hr />
           <div class="education-card reveal">
-            <h3 id="formation_current_1_title">
-            </h3>
-            <p id="formation_current_1_text">
-            </p>
+            <h3 id="formation_current_1_title"></h3>
+            <p id="formation_current_1_text"></p>
             <span class="time" id="formation_current_1_time"></span>
           </div>
           <div class="education-card reveal">
-            <h3 id="formation_current_2_title">
-            </h3>
-            <p id="formation_current_2_text">
-            </p>
-            <span class="time" id="formation_current_2_time"
-              ></span
-            >
+            <h3 id="formation_current_2_title"></h3>
+            <p id="formation_current_2_text"></p>
+            <span class="time" id="formation_current_2_time"></span>
           </div>
-          
+
           <h2 class="reveal" id="title_formation_done"></h2>
           <hr />
           <div class="education-card reveal">
             <h3 id="formation_done_1_title"></h3>
-            <p id="formation_done_1_text">
-            </p>
+            <p id="formation_done_1_text"></p>
             <span class="time" id="formation_done_1_time"></span>
             <a
               class="btn primary"
               href="Assets/PDF/Guilherme Pereira Andraz - Lógica de Programação para Web.pdf"
               target="_blank"
               rel="noopener"
-              >
+            >
               <div class="btn-certificate">
-                  <span id="formation_done_1_certificate">Exibir Certificado</span><img src="./Assets/IMG/new-tab.png" alt="Open in new tab icon" 
-                  class="icon new-tab" />
-                </div>
+                <span id="formation_done_1_certificate"></span
+                ><img
+                  src="./Assets/IMG/new-tab.png"
+                  alt="Open in new tab icon"
+                  class="icon new-tab"
+                />
+              </div>
             </a>
           </div>
           <div class="education-card reveal">
-            <h3 id="formation_done_2_title">Curso Concluido - Curso Online</h3>
-            <p id="formation_done_2_text">
-              Fundamentos de Desenvolvimento Web - TIC em trilhas | Venturus
-            </p>
-            <span class="time" id="formationDone3Time">2025</span>
+            <h3 id="formation_done_2_title"></h3>
+            <p id="formation_done_2_text"></p>
+            <span class="time" id="formationDone3Time"></span>
             <a
               class="btn primary"
               href="Assets/PDF/Guilherme Pereira Andraz - Fundamentos de Desenvolvimento Web .pdf"
               target="_blank"
               rel="noopener"
               id="formation_done_2_certificate"
-              >Exibir Certificado</a
-            >
+            ></a>
           </div>
           <div class="education-card reveal">
-            <h3 id="formation_done_3_title">
-              Curso Concluido - Extracurricular
-            </h3>
-            <p id="formation_current_3_text">
-              Extracurricular de Pacote Office, Excel, Educação Financeira, PNL,
-              Gestão de Carreiras, Libras | ITEMM
-            </p>
-            <span class="time" id="formation_done_3_time">2025</span>
+            <h3 id="formation_done_3_title"></h3>
+            <p id="formation_current_3_text"></p>
+            <span class="time" id="formation_done_3_time"></span>
             <a
               class="btn primary"
               href="Assets/PDF/certificado ITEMM.pdf"
               target="_blank"
               rel="noopener"
               id="formation_done_3_certificate"
-              >Exibir Certificado</a
-            >
+            ></a>
           </div>
           <div class="education-card reveal">
-            <h3 id="formation_done_4_title">
-              Ensino Fundamental Concluido - Ensino Fundamental I & II
-            </h3>
-            <p id="formation_done_4_text">Ensino Fundamental - CEUNSP Salto</p>
-            <span class="time" id="formation_done_4_time">2024</span>
+            <h3 id="formation_done_4_title"></h3>
+            <p id="formation_done_4_text"></p>
+            <span class="time" id="formation_done_4_time"></span>
           </div>
-          <h2 id="title_formation_future">Pretendo Cursar</h2>
+          <h2 id="title_formation_future"></h2>
           <hr />
           <div class="education-card reveal">
-              <h3 id="formation_future_1_title">
-                  Graduação em Análise e Desenvolvimento de Sistemas
-            </h3>
-            <p id="formation_future_1_text">FATEC</p>
-            <span class="time" id="formation_future_1_start"
-              >Inicio estimado: 2028</span
-            >
-            <span class="time" id="formation_future_1_end"
-              >Conclusão estimada: 2030</span
-            >
+            <h3 id="formation_future_1_title"></h3>
+            <p id="formation_future_1_text"></p>
+            <span class="time" id="formation_future_1_start"></span>
+            <span class="time" id="formation_future_1_end"></span>
           </div>
         </section>
 
         <!-- Seção de Contato -->
         <section class="section" id="contato">
           <div class="section-header reveal">
-            <h2 id="title_contact">Contato</h2>
+            <h2 id="title_contact"></h2>
+          </div>
+          <div class="contact-grid">
+            <div class="contact-card reveal">
+              <h2 id="title_contact">Email:</h2>
+              <p id="contact_description">guilherme.andraz@outlook.com</p>
+            </div>
+            <div class="contact-card reveal">
+              <h2 id="title_contact">Telefone:</h2>
+              <p id="contact_description">+55 11 93415-4282</p>
+            </div>
           </div>
           <div class="message-card reveal">
-            <h4 id="contact_invite">
-              Sinta-se à vontade para me enviar uma mensagem aqui pelo site,
-              ficarei feliz em responder!
-            </h4>
-            <p id="contact_note">Minha API me entragará sua mensagem</p>
+            <h4 id="contact_invite"></h4>
+            <p id="contact_note"></p>
             <form action="POST">
               <input type="text" name="name" placeholder="Seu nome" required />
               <input
@@ -744,9 +796,11 @@
                 placeholder="Sua mensagem"
                 required
               ></textarea>
-              <button class="btn primary" type="submit" id="contact_submit">
-                Enviar Mensagem
-              </button>
+              <button
+                class="btn primary"
+                type="submit"
+                id="contact_submit"
+              ></button>
             </form>
           </div>
         </section>

@@ -31,6 +31,9 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+  position: relative;
 }
 
 * {
@@ -145,6 +148,11 @@ ul {
 
 .site-header {
   margin-bottom: 56px;
+  position: relative;
+}
+
+.start {
+  display: flex;
 }
 
 .header-card {
@@ -159,7 +167,8 @@ ul {
   padding: 32px;
   box-shadow: var(--shadow);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 1;
 }
 
 .header-card::after {
@@ -189,6 +198,7 @@ ul {
     rgba(17, 52, 91, 0.35),
     transparent
   );
+  z-index: 0;
 }
 
 .language {
@@ -206,11 +216,9 @@ ul {
 
 .nav-list {
   display: flex;
-  flex-wrap: wrap;
-  margin-top: -12px;
-  gap: 8px 12px;
-  padding: 10px 14px;
-  backdrop-filter: blur(10px);
+  gap: 12px;
+  align-items: center;
+  text-align: center;
 }
 
 .nav-list a {
@@ -260,7 +268,9 @@ ul {
 
 .header-text {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .btn-certificate {
@@ -274,9 +284,7 @@ ul {
 
 .theme {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  margin-top: 4px;
 }
 
 #theme-toggle.theme-toggle {
@@ -912,10 +920,85 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  max-width: 640px;
   box-shadow: 0 10px 22px rgba(11, 22, 36, 0.08);
   margin: 20px 0;
   position: relative;
+}
+
+.theme-label {
+  width: 470px;
+  display: inline-block;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  max-width: 90vw;
+  right: 0;
+  left: auto;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  padding-right: 32px; /* espaço para o ícone */
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s step-end;
+  z-index: 100000;
+  list-style: none;
+  overflow: hidden;
+}
+
+.dropdown-menu[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 16px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.dropdown-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Ajuste para mobile */
+@media (max-width: 640px) {
+  .dropdown-menu {
+    min-width: 100%;
+    right: 0;
+  }
 }
 
 .education-card::before {
@@ -1148,5 +1231,24 @@ hr {
 
   .btn {
     transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .btn.ghost.lang-btn {
+    min-width: auto;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .languade {
+    order: -1;
+    width: 100%;
+    justify-content: flex-end;
   }
 }

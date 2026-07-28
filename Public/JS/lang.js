@@ -29,8 +29,10 @@ const textNodes = {
   li7: document.getElementById("li7"),
   titleSummary: document.getElementById("title_summary"),
   summaryContent: document.getElementById("summary_content"),
+  summaryContent2: document.getElementById("summary_content2"),
   titleObjective: document.getElementById("title_objective"),
   objectiveContent: document.getElementById("objective_content"),
+  objectiveContent2: document.getElementById("objective_content2"),
   titleSkills: document.getElementById("title_skills"),
   subtitleSkills: document.getElementById("subtitle_skills"),
   skillsHardTitle: document.getElementById("skills_hard_title"),
@@ -97,6 +99,11 @@ const textNodes = {
   formationDone3Title: document.getElementById("formation_done_3_title"),
   formationDone3Text: document.getElementById("formation_done_3_text"),
   formationDone3Time: document.getElementById("formation_done_3_time"),
+  formationDone3Certificate: document.getElementById("formation_done_3_certificate"),
+  formationDone4Title: document.getElementById("formation_done_4_title"),
+  formationDone4Text: document.getElementById("formation_done_4_text"),
+  formationDone4Time: document.getElementById("formation_done_4_time"),
+  formationDone4Certificate: document.getElementById("formation_done_4_certificate"),
   titleFormationFuture: document.getElementById("title_formation_future"),
   formationFuture1Title: document.getElementById("formation_future_1_title"),
   formationFuture1Text: document.getElementById("formation_future_1_text"),
@@ -119,8 +126,8 @@ const translations = {
     eyebrow: "Currículo Web",
     eyebrowSeparator: "-",
     eyebrowBrasil: "Brasil",
-    title: "Guilherme Andraz - <br /> Desenvolvedor Frontend",
-    role: "HTML • CSS • JavaScript • API • Frontend • Frameworks • Banco de Dados",
+    title: "Guilherme Andraz - <br /> Desenvolvedor Web",
+    role: "HTML • CSS • JavaScript • TypeScript • React • Node.js • Core MVC • APIs • SQL",
     role2: "16 Anos • Salto SP • Remoto",
     download: "Baixar Currículo",
     headerGithub: "GitHub",
@@ -135,11 +142,22 @@ const translations = {
     li6: "Formação",
     li7: "Contato",
     titleSummary: "Resumo Profissional",
-    summaryContent:
-      "Estudante de Análise e Desenvolvimento de Sistemas (ADS) focado em desenvolvimento frontend. Experiência pessoal prática com criação de sites (como este). Buscando oportunidades remotas para aplicar meus conhecimentos em projetos reais e evoluir tecnicamente.",
+    summaryContent: `Estudante de Desenvolvimento de Sistemas pela ETEC Martinho Di
+Ciero com foco em desenvolvimento web. Experiência prática na
+construção de aplicações utilizando HTML/CSS, React, TypeScript,
+ASP.NET Core MVC e integração com APIs REST. Vivência em
+versionamento com Git/GitHub, modelagem básica de banco de
+dados e desenvolvimento de interfaces responsivas. Interesse em
+desenvolvimento de software, suporte técnico e infraestrutura.`,
+    summaryContent2: `Perfil proativo, com facilidade de aprendizado, tenho muito interesse e
+disposição para atuar em diferentes áreas da Tecnologia da
+Informação.`,
     titleObjective: "Objetivos",
-    objectiveContent:
-      "Meu Principal objetivo é aprender, primeiramente como desenvolvedor frontend, para ampliar meus conhecimentos, ganhar experiência prática e contribuir para projetos. Futuramente, desejo me tornar um profissional completo, desenvolver em backend e ser capaz de desenvolver soluções web eficientes.",
+    objectiveContent: `Busco minha primeira oportunidade de estágio ou posição de
+aprendizagem na área de Tecnologia da Informação.`,
+    objectiveContent2: `Tenho interesse em desenvolvimento web, suporte técnico,
+infraestrutura, banco de dados, desenvolvimento de software e
+demais áreas relacionadas à TI.`,
     titleSkills: "Minhas Habilidades",
     subtitleSkills: "O que eu já uso sei e o que uso.",
     skillsHardTitle: "Hard Skills",
@@ -160,29 +178,32 @@ const translations = {
     project1Content:
       "Garage do Edu é um projeto em construção para divulgar e gerenciar a venda de carros classicos. O projeto engloba uma landing page rica em interacao, paginas de login e cadastro, um painel administrativo para gestão de estoque e um backend em Node.js responsavel por autenticacao e CRUD de carros e usuarios, o projeto tem uma base sólida para seu desenvolvimento.",
     project1Stack: "Stack: HTML, CSS, JavaScript, Node.js, Express, MongoDB",
-    project1Link: "Repositório",
+    project1Link: "Ver Repositório",
     project2Title: "Help Desk",
     project2Status: "Status: Em Desenvolvimento",
     project2Content:
       "Este projeto é um Help Desk em ASP.NET Core MVC (C#), focado em exibir chamados de suporte. Ele possui: Listagem de chamados com título, descrição, status code, status e data de abertura. Tela de detalhes de cada chamado. Estrutura padrão MVC com Controllers, Models, Views e assets em wwwroot. Atualmente, os chamados são mantidos em lista estática em memória (simulando banco), então o sistema funciona como uma base inicial/didática para evolução futura (CRUD completo, persistência real, autenticação etc.).",
     project2Stack: "Stack: HTML, CSS, JavaScript, C#",
-    project2Link: "Repositório",
+    project2Link: "Ver Repositório",
+    // Landing Page Project
     project3Title: "Landing Page",
     project3Status: "Status: Em Desenvolvimento",
     project3Content:
       "Este é o proprio site do meu curriculo (esse site): uma landing page responsiva com animações de entrada, seções bem definidas (resumo, habilidades, projetos, formacao e contato), cards interativos e layout focado em clareza e UX, o JavaScript tem uma boa interação com o DOM, o que permite fazer interações como a seção de habilidades por exemplo.",
     project3Stack: "Stack: HTML, CSS, JavaScript",
     project3Link: "Repositório",
+    // Easy Van Project
     project4Title: "Easy Van",
     project4Status: "Status: Em Desenvolvimento",
     project4Content:
-      "EasyVan é um sistema web MVC para gerenciar o transporte de vans. A proposta é facilitar o controle de rotas, horários, passageiros e motoristas, reduzindo erros operacionais e melhorando a organização do serviço. O projeto usa o template ASP.NET Core MVC",
+      "EasyVan é um sistema web desenvolvido em ASP.NET Core MVC para gerenciar o transporte de vans. A proposta é facilitar o controle de rotas, horários, passageiros e motoristas, reduzindo erros operacionais e melhorando a organização do serviço. O projeto usa o template ASP.NET Core MVC",
     project4Stack:
-      "Stack: HTML, CSS, JavaScript, C#, TypeScript, APIs de Autenticação, SQL",
-    project4Link: "Repositório",
+      "Stack: ASP.NET Core MVC, C#, HTML, CSS, JavaScript, TypeScript, APIs de Autenticação, SQL",
+    project4Link: "Ver Repositório",
     moretxtProjects: "Mais repositórios atualizados no GitHub.",
+    // About Section
     titleAbout: "Sobre Mim",
-    subtitleAbout: "Um pouco sobre mim e minha trajetória.",
+    subtitleAbout: "Um pouco sobre mim.",
     aboutContent:
       "Meu nome é Guilherme Pereira Andraz, tenho 16 anos, moro em Salto - SP e sou estudante de Análise e Desenvolvimento de Sistemas (ADS). Meu foco atual é aprender, estou me aprofundando em tecnologias de desenvolvimento web, e estudando linguagens Backend, atualmente estou buscando oportunidades remotas para colaborar com minhas habilidades, ganhar experiência prática e aprender com as oportunidades. Pretendo me tornar um desenvolvedor backend em breve.",
     titleFormation: "Formação Acadêmica",
@@ -210,10 +231,11 @@ const translations = {
       "Fundamentos de Desenvolvimento Web - TIC em trilhas | Venturus",
     formationDone2Time: "2025",
     formationDone2Certificate: "Exibir Certificado",
-    formationDone3Title:
-      "Curso Concluido - Extracurricular",
-    formationDone3Text:"Extracurricular de Pacote Office, Excel, Educação Financeira, PNL,Gestão de Carreiras, Libras | ITEMM",
+    formationDone3Title: "Curso Concluido - Extracurricular",
+    formationDone3Text:
+      "Extracurricular de Pacote Office, Excel, Educação Financeira, PNL,Gestão de Carreiras, Libras | ITEMM",
     formationDone3Time: "2025",
+    formationDone3Certificate: "Exibir Certificado",
     formationDone4Title:
       "Ensino Fundamental Concluido - Ensino Fundamental I & II",
     formationDone4Text: "Ensino Fundamental - CEUNSP Salto",
@@ -394,7 +416,6 @@ function changelanguage_por() {
 function changelanguage_eng() {
   applyTranslations(translations.en);
 }
-
 window.changeLanguage = changeLanguage;
 window.changelanguage_por = changelanguage_por;
 window.changelanguage_eng = changelanguage_eng;

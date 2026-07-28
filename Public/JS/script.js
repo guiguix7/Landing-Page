@@ -23,6 +23,35 @@ if ("IntersectionObserver" in window) {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
 
+// Dropdown do botão de download
+const dropdownToggle = document.querySelector('#download-dropdown .dropdown-toggle');
+const dropdownMenu = document.querySelector('#download-dropdown .dropdown-menu');
+
+if (dropdownToggle && dropdownMenu) {
+  dropdownToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    const expanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+    dropdownToggle.setAttribute('aria-expanded', !expanded);
+    dropdownMenu.setAttribute('aria-hidden', expanded);
+  });
+
+  // Fechar ao clicar fora
+  document.addEventListener('click', (e) => {
+    if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownToggle.setAttribute('aria-expanded', 'false');
+      dropdownMenu.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  // Fechar ao pressionar Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dropdownToggle.getAttribute('aria-expanded') === 'true') {
+      dropdownToggle.setAttribute('aria-expanded', 'false');
+      dropdownMenu.setAttribute('aria-hidden', 'true');
+    }
+  });
+}
+
 const themeToggle = document.getElementById("theme-toggle");
 const themeStorageKey = "landing-page-theme";
 
