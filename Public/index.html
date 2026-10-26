@@ -4,868 +4,276 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Guilherme Pereira Andraz" />
-    <meta
-      name="description"
-      content="Currículo profissional com foco em backend, habilidades reais e projetos em destaque."
-    />
-    <meta
-      name="keywords"
-      content="Currículo, Desenvolvedor Frontend, Habilidades, Projetos, Guilherme Andraz"
-    />
-    <meta
-      property="og:title"
-      content="Gui - Desenvolvedor Frontend em formação"
-    />
-    <meta
-      property="og:description"
-      content="Currículo profissional com foco em frontend, habilidades reais e projetos em destaque."
-    />
-    <meta property="website" content="https://my-landingpage.vercel.app/" />
+    <meta name="description" content="Portfólio de Guilherme Pereira Andraz, estudante de Desenvolvimento de Sistemas com projetos web e mobile." />
+    <meta name="keywords" content="Guilherme Andraz, estágio desenvolvimento web, JavaScript, TypeScript, React, C#, ASP.NET Core MVC, Flutter" />
+    <meta name="theme-color" content="#f4f6fb" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Guilherme Andraz — Portfólio de Desenvolvimento" />
+    <meta property="og:description" content="Projetos web e mobile de Guilherme Pereira Andraz." />
+    <meta property="og:locale" content="pt_BR" />
+    <link rel="icon" type="image/svg+xml" href="./Assets/IMG/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./CSS/style.css" />
-    <title>Gui - Desenvolvedor Frontend</title>
+    <title>Guilherme Andraz — Portfólio</title>
   </head>
-
-  <body onload="(SoftSkills(), changelanguage_por('pt'))" id="site">
+  <body id="site">
+    <a class="skip-link" href="#main" data-i18n="skipLink">Pular para o conteúdo</a>
     <div class="page">
-      <header class="site-header">
+      <header class="site-header" id="inicio">
         <div class="header-card reveal">
-          <div
-            class="avatar"
-            role="img"
-            aria-label="Avatar minimalista com iniciais"
-          >
-            GA
-          </div>
-          <div class="header-linehead">
-            <div class="header-text">
-              <div class="start">
-                <p class="eyebrow" id="eyebrow"></p>
-                <p class="eyebrow" id="eyebrow_separator"></p>
-                <p class="eyebrow brasil" id="eyebrow_brasil"></p>
-                <label for="theme-toggle" class="theme-label"></label>
-                <div class="theme">
-                  <button
-                    class="btn ghost theme-toggle"
-                    id="theme-toggle"
-                    type="button"
-                    aria-label="Alternar tema"
-                    aria-pressed="false"
-                  >
-                    <img src="./Assets/IMG/sun.png" alt="" class="icon sun" />
-                    <span class="theme-toggle-divider" aria-hidden="true"
-                      >|</span
-                    >
-                    <img src="./Assets/IMG/lua.png" alt="" class="icon moon" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <h1 id="title"></h1>
-            <p class="role" id="role"></p>
-            <p class="role" id="role2"></p>
-            <div class="cta-row">
-              <div class="dropdown" id="download-dropdown">
-                <button
-                  class="btn primary dropdown-toggle"
-                  aria-expanded="false"
-                  aria-haspopup="menu"
-                >
-                  <span id="download"></span>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    class="ml-1"
-                  >
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-hidden="true">
-                  <li role="none">
-                    <a
-                      href="Assets/cv-guilherme-andraz.pdf"
-                      download
-                      class="dropdown-item"
-                      role="menuitem"
-                    >
-                      Baixar Currículo (Português)
-                    </a>
-                  </li>
-                  <li role="none">
-                    <a
-                      href="Assets/cv-guilherme-andraz.md"
-                      download
-                      class="dropdown-item"
-                      role="menuitem"
-                    >
-                      Download Curriculum (English)
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <a
-                class="btn ghost github"
-                href="https://github.com/guiguix7"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><span id="header_github"></span
-                ><img src="Assets/IMG/github.png" alt="Icone do GitHub"
-              /></a>
-              <a
-                class="btn ghost linkedin"
-                href="https://www.linkedin.com/in/guilhermeandraz/"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><span id="header_linkedin"></span
-                ><img src="Assets/IMG/linkedin.png" alt="Icone do LinkedIn"
-              /></a>
-              <span>|</span>
-              <div class="languade" role="group" aria-label="Seleção de idioma">
-                <button
-                  type="button"
-                  class="btn ghost lang-btn is-active"
-                  id="lang_pt_btn"
-                  data-lang="pt"
-                  aria-pressed="true"
-                  onclick="(changeLanguage('pt'), changelanguage_por(pt_br))"
-                >
-                  Português
-                  <img src="./Assets/IMG/brasil.png" alt="" />
-                </button>
-                <button
-                  type="button"
-                  class="btn ghost lang-btn"
-                  id="lang_en_btn"
-                  data-lang="en"
-                  aria-pressed="false"
-                  onclick="(changeLanguage('en'), changelanguage_eng(eng))"
-                >
-                  English
-                  <img src="./Assets/IMG/estados-unidos.png" alt="" />
-                </button>
+          <div class="header-topline">
+            <a class="brand" href="#inicio" aria-label="Guilherme Andraz — início" data-i18n-aria-label="brandAriaLabel">
+              <span class="brand-mark" aria-hidden="true">GA<span>.</span></span>
+              <span class="brand-label" data-i18n="brandLabel">Portfólio pessoal</span>
+            </a>
+            <div class="utility-controls">
+              <button class="utility-button theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema" data-i18n-aria-label="themeAriaLabel" aria-pressed="false">
+                <span class="utility-icon" aria-hidden="true" id="theme-icon">☾</span>
+                <span data-i18n="themeLabel">Tema</span>
+              </button>
+              <div class="language-switch" role="group" aria-label="Seleção de idioma" data-i18n-aria-label="languageSelectionLabel">
+                <button type="button" class="language-button is-active" data-language="pt" aria-pressed="true">PT</button>
+                <button type="button" class="language-button" data-language="en" aria-pressed="false">EN</button>
               </div>
             </div>
           </div>
+
+          <div class="hero-layout">
+            <div class="avatar" aria-hidden="true">GA<span class="avatar-dot"></span></div>
+            <div class="hero-content">
+              <div class="eyebrow-row">
+                <span class="eyebrow" data-i18n="heroEyebrow">DESENVOLVIMENTO WEB</span>
+                <span class="eyebrow-divider" aria-hidden="true">/</span>
+                <span class="eyebrow location-tag" data-i18n="locationTag">Salto, SP — Brasil</span>
+              </div>
+              <h1>Guilherme Pereira <span>Andraz</span></h1>
+              <p class="hero-role" data-i18n="heroRole">Estudante de Desenvolvimento de Sistemas · Em busca de estágio em Desenvolvimento Web</p>
+              <p class="hero-intro" data-i18n="heroIntro">Construo projetos web e aplicações mobile enquanto desenvolvo minha base técnica em frontend, backend e dados.</p>
+              <div class="cta-row">
+                <a class="btn primary" href="#projetos"><span data-i18n="ctaProjects">Explorar projetos</span><span aria-hidden="true">↗</span></a>
+                <a class="btn secondary" href="#contato" data-i18n="ctaContact">Entrar em contato</a>
+                <a class="btn ghost" href="./Assets/cv-guilherme-andraz.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="ctaResume">Currículo em PDF</span><span aria-hidden="true">↓</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-links" aria-label="Links profissionais" data-i18n-aria-label="socialLinksLabel">
+            <a class="social-link" href="https://github.com/guiguix7" target="_blank" rel="noopener noreferrer">
+              <img src="./Assets/IMG/github.png" alt="" width="18" height="18" /><span>GitHub</span><span class="external-mark" aria-hidden="true">↗</span>
+            </a>
+            <a class="social-link" href="https://www.linkedin.com/in/guilhermeandraz/" target="_blank" rel="noopener noreferrer">
+              <img src="./Assets/IMG/linkedin.png" alt="" width="18" height="18" /><span>LinkedIn</span><span class="external-mark" aria-hidden="true">↗</span>
+            </a>
+            <span class="availability"><span class="availability-dot" aria-hidden="true"></span><span data-i18n="availability">Aberto a oportunidades de estágio</span></span>
+          </div>
+
           <hr class="divider" />
-          <div class="nav">
-            <nav role="navigation" aria-label="Menu de navegação">
-              <ul class="nav-list">
-                <li><a href="#resumo" id="li1"></a></li>
-                <li><a href="#objetivos" id="li2"></a></li>
-                <li><a href="#skills" id="li3"></a></li>
-                <li><a href="#projetos" id="li4"></a></li>
-                <li><a href="#sobre" id="li5"></a></li>
-                <li><a href="#formacao" id="li6"></a></li>
-                <li><a href="#contato" id="li7"></a></li>
-              </ul>
-            </nav>
-          </div>
+          <nav class="nav" aria-label="Navegação principal" data-i18n-aria-label="mainNavLabel">
+            <ul class="nav-list">
+              <li><a href="#sobre" data-i18n="navAbout">Sobre</a></li>
+              <li><a href="#skills" data-i18n="navSkills">Tecnologias</a></li>
+              <li><a href="#projetos" data-i18n="navProjects">Projetos</a></li>
+              <li><a href="#formacao" data-i18n="navEducation">Formação</a></li>
+              <li><a href="#contato" data-i18n="navContact">Contato</a></li>
+            </ul>
+          </nav>
         </div>
       </header>
 
-      <main>
-        <!-- Seção de Resumo Profissional -->
-        <section class="section" id="resumo">
+      <main id="main">
+        <section class="section" id="sobre" aria-labelledby="title-about">
           <div class="section-header reveal">
-            <h2 id="title_summary"></h2>
+            <div class="section-heading-copy">
+              <p class="section-index" data-i18n="aboutIndex">01 / PERFIL</p>
+              <h2 id="title-about" data-i18n="titleAbout">Sobre mim</h2>
+            </div>
+            <p class="section-subtitle" data-i18n="subtitleAbout">Formação técnica, prática em projetos e evolução contínua.</p>
           </div>
-          <div class="callout reveal">
-            <p id="summary_content"></p>
-            <br />
-            <p id="summary_content2"></p>
+          <div class="about-panel reveal">
+            <div class="about-mark" aria-hidden="true">“</div>
+            <div class="about-copy">
+              <p class="about-lead" data-i18n="aboutLead">Sou estudante de Técnico em Desenvolvimento de Sistemas na ETEC Martinho Di Ciero, com foco em desenvolvimento web.</p>
+              <p data-i18n="aboutBody">Aprendo construindo projetos que me permitem explorar interfaces, lógica de aplicações e persistência de dados. No meu portfólio, trabalho com tecnologias como React, TypeScript, C#/.NET e Flutter/SQLite.</p>
+              <p data-i18n="aboutGoal">Busco uma oportunidade de estágio em que eu possa contribuir com uma equipe, aplicar o que venho estudando e continuar desenvolvendo minhas habilidades.</p>
+            </div>
+            <div class="about-side-note">
+              <span class="side-note-label" data-i18n="focusLabel">FOCO ATUAL</span>
+              <span data-i18n="focusValue">Desenvolvimento Web</span>
+              <span class="side-note-divider"></span>
+              <span class="side-note-label" data-i18n="alsoExploreLabel">TAMBÉM EXPLORO</span>
+              <span data-i18n="alsoExploreValue">Aplicações mobile e dados locais</span>
+            </div>
           </div>
         </section>
 
-        <!-- Seção de Objetivos -->
-        <section class="section" id="objetivos">
+        <section class="section" id="skills" aria-labelledby="title-skills">
           <div class="section-header reveal">
-            <h2 id="title_objective"></h2>
-          </div>
-          <div class="callout reveal">
-            <p id="objective_content"></p>
-            <br />
-            <p id="objective_content2"></p>
-          </div>
-        </section>
-
-        <!-- Seção de Habilidades -->
-        <section class="section" id="skills">
-          <div class="section-header reveal">
-            <h2 id="title_skills"></h2>
-            <p id="subtitle_skills"></p>
+            <div class="section-heading-copy">
+              <p class="section-index" data-i18n="skillsIndex">02 / FERRAMENTAS</p>
+              <h2 id="title-skills" data-i18n="titleSkills">Tecnologias e ferramentas</h2>
+            </div>
+            <p class="section-subtitle" data-i18n="subtitleSkills">Selecione uma tecnologia para ver seu contexto no portfólio.</p>
           </div>
           <div class="skills-grid">
-            <div class="skill-card reveal">
-              <h3 id="skills_hard_title"></h3>
-              <p id="skills_hard_hint"></p>
-              <ul class="tag-list" id="skill-list">
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Logica"
-                    onclick="logica()"
-                    id="logica"
-                    name="btn-skils"
-                  >
-                    Lógica de Programação
-                  </button>
-                </li>
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Inglês"
-                    onclick="Ingles()"
-                    id="Inglês"
-                    name="btn-skils"
-                  >
-                    Inglês
-                  </button>
-                </li>
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Git"
-                    onclick="Git()"
-                    id="git"
-                    name="btn-skils"
-                  >
-                    Git
-                  </button>
-                </li>
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="GitHub"
-                    onclick="GitHub()"
-                    id="github"
-                    name="btn-skils"
-                  >
-                    GitHub
-                  </button>
-                </li>
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Vercel"
-                    onclick="Vercel()"
-                    id="vercel"
-                    name="btn-skils"
-                  >
-                    Vercel
-                  </button>
-                </li>
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="AWS"
-                    onclick="AWS()"
-                    id="aws"
-                    name="btn-skils"
-                  >
-                    AWS
-                  </button>
-                </li>
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Docker"
-                    onclick="Docker()"
-                    id="docker"
-                    name="btn-skils"
-                  >
-                    Docker
-                  </button>
-                </li>
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Segurança da Informação"
-                    onclick="SegurancaDaInformacao()"
-                    id="seguranca-da-informacao"
-                    name="btn-skils"
-                  >
-                    Segurança da Informação
-                  </button>
-                </li>
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Suporte Técnico"
-                    onclick="SuporteTecnico()"
-                    id="suporte-tecnico"
-                    name="btn-skils"
-                  >
-                    Suporte Técnico
-                  </button>
-                </li>
-                <li>
-                  <!-- Conhecimentos Gerais -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Tecnologia da Informação"
-                    onclick="TecnologiaDaInformacao()"
-                    id="tecnologia-da-informacao"
-                    name="btn-skils"
-                  >
-                    Tecnologia da Informação
-                  </button>
-                </li>
-                <li>
-                  <!-- Front-end -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="HTML"
-                    onclick="HTML()"
-                    id="HTML"
-                    name="btn-skils"
-                  >
-                    HTML
-                  </button>
-                </li>
-                <li>
-                  <!-- Front-end -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="CSS"
-                    onclick="CSS()"
-                    id="CSS"
-                    name="btn-skils"
-                  >
-                    CSS
-                  </button>
-                </li>
-                <li>
-                  <!-- Front-end -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="JavaScript"
-                    onclick="JavaScript()"
-                    id="JavaScript"
-                    name="btn-skils"
-                  >
-                    JavaScript
-                  </button>
-                </li>
-                <li>
-                  <!-- Front-end -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="TypeScript"
-                    onclick="TypeScript()"
-                    id="TypeScript"
-                    name="btn-skils"
-                  >
-                    TypeScript
-                  </button>
-                </li>
-                <li>
-                  <!-- Front/Back -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="React"
-                    onclick="React()"
-                    id="React"
-                    name="btn-skils"
-                  >
-                    React
-                  </button>
-                </li>
-                <li>
-                  <!-- Frameworks -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="JQuery"
-                    onclick="JQuery()"
-                    id="JQuery"
-                    name="btn-skils"
-                  >
-                    JQuery
-                  </button>
-                </li>
-                <li>
-                  <!-- Back-end -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="CSharp"
-                    onclick="CSharp()"
-                    id="CSharp"
-                    name="btn-skils"
-                  >
-                    C#
-                  </button>
-                </li>
-                <li>
-                  <!-- Back-end -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Python"
-                    onclick="Python()"
-                    id="Python"
-                    name="btn-skils"
-                  >
-                    Python
-                  </button>
-                </li>
-                <li>
-                  <!-- Back-end -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Node.js"
-                    onclick="NodeJS()"
-                    id="Node.js"
-                    name="btn-skils"
-                  >
-                    Node.js
-                  </button>
-                </li>
-                <li>
-                  <!-- Back-end -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="APIs REST"
-                    onclick="API()"
-                    id="APIs REST"
-                    name="btn-skils"
-                  >
-                    APIs REST
-                  </button>
-                </li>
-                <li>
-                  <!-- Frameworks -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Bootstrap"
-                    onclick="Bootstrap()"
-                    id="Bootstrap"
-                    name="btn-skils"
-                  >
-                    Bootstrap
-                  </button>
-                </li>
-                <li>
-                  <!-- Banco de Dados -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="SQL"
-                    onclick="SQL()"
-                    id="SQL"
-                    name="btn-skils"
-                  >
-                    SQL
-                  </button>
-                </li>
-                <li>
-                  <!-- Banco de Dados -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="MongoDB"
-                    onclick="MongoDB()"
-                    id="MongoDB"
-                    name="btn-skils"
-                  >
-                    MongoDB
-                  </button>
-                </li>
-                <li>
-                  <!-- Banco de Dados -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Firebase"
-                    onclick="Firebase()"
-                    id="Firebase"
-                    name="btn-skils"
-                  >
-                    Firebase
-                  </button>
-                </li>
-                <li>
-                  <!-- Soft Skills -->
-                  <button
-                    type="button"
-                    class="skill-btn"
-                    data-skill="Soft Skills"
-                    onclick="SoftSkills()"
-                    id="Soft Skills"
-                    name="btn-skils"
-                  >
-                    Soft Skills
-                  </button>
-                </li>
-              </ul>
+            <div class="skill-card skill-selector-card reveal">
+              <div class="card-heading">
+                <div>
+                  <h3 data-i18n="skillsListTitle">Conhecimentos técnicos</h3>
+                  <p data-i18n="skillsHint">Escolha uma opção para explorar os detalhes.</p>
+                </div>
+                <span class="card-count" id="skills-count">17</span>
+              </div>
+              <div id="skill-groups" class="skill-groups" aria-label="Tecnologias disponíveis" data-i18n-aria-label="skillOptionsLabel"></div>
+              <p class="card-footnote" data-i18n="skillsFootnote">Tecnologias informadas no currículo; os links destacam apenas relações relevantes com projetos.</p>
             </div>
-            <div class="skill-card reveal" id="skill">
-              <div class="txt">
-                <h3 id="skills_soft_title">Soft Skills</h3>
-                <h4 id="skills_soft_subtitle">Habilidades Técnicas</h4>
+
+            <div class="skill-card skill-detail-card reveal" id="skill-detail" aria-live="polite" aria-atomic="true">
+              <div class="detail-topline">
+                <span class="detail-kicker" data-i18n="detailKicker">TECNOLOGIA SELECIONADA</span>
+                <span class="detail-category" id="skill-detail-category">Frontend</span>
               </div>
-              <div class="meter-list">
-                <div class="meter-item">
-                  <div class="meter-label">
-                    <span id="soft_organization_label">Organização</span>
-                    <span id="soft_organization_value">86%</span>
-                  </div>
-                  <div
-                    class="meter-bar"
-                    style="--level: 86%"
-                    role="progressbar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="86"
-                  ></div>
-                </div>
-                <div class="meter-item">
-                  <div class="meter-label">
-                    <span id="soft_fastlearning_label">Aprendizado rápido</span>
-                    <span id="soft_fastlearning_value">82%</span>
-                  </div>
-                  <div
-                    class="meter-bar"
-                    style="--level: 82%"
-                    role="progressbar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="82"
-                  ></div>
-                </div>
-                <div class="meter-item">
-                  <div class="meter-label">
-                    <span id="soft_autonomy_label">Autonomia</span>
-                    <span id="soft_autonomy_value">78%</span>
-                  </div>
-                  <div
-                    class="meter-bar"
-                    style="--level: 78%"
-                    role="progressbar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="78"
-                  ></div>
-                </div>
+              <h3 id="skill-detail-title">JavaScript</h3>
+              <p class="detail-description" id="skill-detail-description"></p>
+              <div class="detail-divider"></div>
+              <div class="related-block">
+                <p class="detail-label" id="skill-related-label" data-i18n="relatedProjects">Conexões com o portfólio</p>
+                <div id="skill-related-projects" class="related-projects"></div>
               </div>
+              <p class="detail-note" id="skill-detail-note"></p>
             </div>
           </div>
         </section>
 
-        <!-- Seção de Projetos -->
-        <section class="section" id="projetos">
+        <section class="section" id="projetos" aria-labelledby="title-projects">
           <div class="section-header reveal">
-            <h2 id="title_projects"></h2>
-            <p id="subtitle_projects"></p>
+            <div class="section-heading-copy">
+              <p class="section-index" data-i18n="projectsIndex">03 / TRABALHOS SELECIONADOS</p>
+              <h2 id="title-projects" data-i18n="titleProjects">Projetos em destaque</h2>
+            </div>
+            <p class="section-subtitle" data-i18n="subtitleProjects">Projetos pessoais que demonstram diferentes áreas do desenvolvimento.</p>
           </div>
           <div class="project-grid">
             <article class="project-card reveal">
-              <div class="project-meta">
-                <!-- Garage do Edu -->
-                <h3 id="project1_title"></h3>
-                <h4 id="project1_status"></h4>
-                <p id="project1_content"></p>
-                <small id="project1_stack"></small>
-              </div>
-              <div class="project-links">
-                <a
-                  class="btn small primary"
-                  href="https://github.com/guiguix7/Garage-do-Edu"
-                  target="_blank"
-                  rel="noopener"
-                  id="project1_link"
-                ></a>
-              </div>
+              <div class="project-card-top"><span class="project-number">01</span><span class="project-type" data-i18n="personalProject">PROJETO PESSOAL</span></div>
+              <h3>Orva</h3>
+              <p class="project-summary" data-i18n="projectOrvaDescription">Aplicativo de organização pessoal para metas, checklists, rotina, hobbies, notas e diário, com armazenamento local offline via SQLite.</p>
+              <div class="project-stack" aria-label="Tecnologias do projeto Orva" data-i18n-aria-label="orvaStackLabel"><span>Flutter</span><span>Dart</span><span>SQLite</span></div>
+              <a class="project-link" href="https://github.com/guiguix7/Orva" target="_blank" rel="noopener noreferrer"><span data-i18n="viewRepository">Ver repositório</span><span aria-hidden="true">↗</span></a>
             </article>
             <article class="project-card reveal">
-              <div class="project-meta">
-                <!-- Help Desk -->
-                <h3 id="project2_title"></h3>
-                <h4 id="project2_status"></h4>
-                <p id="project2_content"></p>
-                <small id="project2_stack"></small>
-              </div>
-              <div class="project-links">
-                <a
-                  class="btn small primary"
-                  href="https://github.com/guiguix7/HelpDesk"
-                  target="_blank"
-                  rel="noopener"
-                  id="project2_link"
-                ></a>
-              </div>
+              <div class="project-card-top"><span class="project-number">02</span><span class="project-type" data-i18n="personalProject">PROJETO PESSOAL</span></div>
+              <h3>Drazyx</h3>
+              <p class="project-summary" data-i18n="projectDrazyxDescription">Página do artista Drazyx, estruturada para apresentar sua identidade musical, lançamentos e conteúdos.</p>
+              <div class="project-stack" aria-label="Tecnologias do projeto Drazyx" data-i18n-aria-label="drazyxStackLabel"><span>React</span><span>TypeScript</span><span>Tailwind CSS</span><span>PostgreSQL</span></div>
+              <a class="project-link" href="https://github.com/guiguix7/Drazyx" target="_blank" rel="noopener noreferrer"><span data-i18n="viewRepository">Ver repositório</span><span aria-hidden="true">↗</span></a>
             </article>
             <article class="project-card reveal">
-              <div class="project-meta">
-                <!-- Landing Page -->
-                <h3 id="project3_title"></h3>
-                <h4 id="project3_status"></h4>
-                <p id="project3_content"></p>
-                <small id="project3_stack"></small>
-              </div>
-              <div class="project-links">
-                <a
-                  class="btn small primary"
-                  href="https://github.com/guiguix7/Landing-Page"
-                  target="_blank"
-                  rel="noopener"
-                  id="project3_link"
-                ></a>
-              </div>
-            </article>
-            <article class="project-card reveal">
-              <div class="project-meta">
-                <!-- Easy Van -->
-                <h3 id="project4_title"></h3>
-                <h4 id="project4_status"></h4>
-                <p id="project4_content"></p>
-                <small id="project4_stack"></small>
-              </div>
-              <div class="project-links">
-                <a
-                  class="btn small primary"
-                  href="https://github.com/guiguix7/EasyVan"
-                  target="_blank"
-                  rel="noopener"
-                  id="project4_link"
-                ></a>
-              </div>
+              <div class="project-card-top"><span class="project-number">03</span><span class="project-type" data-i18n="personalProject">PROJETO PESSOAL</span></div>
+              <h3>EasyVan</h3>
+              <p class="project-summary" data-i18n="projectEasyVanDescription">Sistema web para gerenciamento de transporte de vans, com login, cadastro e CRUD de usuários, validação de formulários e interface responsiva.</p>
+              <div class="project-stack" aria-label="Tecnologias do projeto EasyVan" data-i18n-aria-label="easyvanStackLabel"><span>ASP.NET Core MVC</span><span>C#</span><span>SQLite</span></div>
+              <a class="project-link" href="https://github.com/guiguix7/EasyVan" target="_blank" rel="noopener noreferrer"><span data-i18n="viewRepository">Ver repositório</span><span aria-hidden="true">↗</span></a>
             </article>
           </div>
-          <p class="note reveal" id="moretxt_projects"></p>
+          <p class="projects-note reveal"><span class="note-dot" aria-hidden="true"></span><span data-i18n="projectsNote">As descrições destacam o escopo documentado; consulte os repositórios para ver a implementação.</span></p>
         </section>
 
-        <!-- Seção Sobre Mim -->
-        <section class="section" id="sobre">
+        <section class="section" id="formacao" aria-labelledby="title-education">
           <div class="section-header reveal">
-            <h2 id="title_about"></h2>
-            <p id="subtitle_about"></p>
-          </div>
-          <div class="callout reveal">
-            <div class="about-content">
-              <p id="about_content"></p>
+            <div class="section-heading-copy">
+              <p class="section-index" data-i18n="educationIndex">04 / APRENDIZADO</p>
+              <h2 id="title-education" data-i18n="titleEducation">Formação e cursos</h2>
             </div>
+            <p class="section-subtitle" data-i18n="subtitleEducation">Formação técnica em andamento e cursos complementares.</p>
+          </div>
+          <div class="education-list">
+            <article class="education-card education-primary reveal">
+              <div class="education-marker" aria-hidden="true">01</div>
+              <div class="education-content">
+                <span class="education-status" data-i18n="inProgress">EM ANDAMENTO</span>
+                <h3 data-i18n="educationTechnicalTitle">Técnico em Desenvolvimento de Sistemas</h3>
+                <p>ETEC Martinho Di Ciero</p>
+              </div>
+              <span class="education-time">2025–2027</span>
+            </article>
+            <article class="education-card reveal">
+              <div class="education-marker" aria-hidden="true">02</div>
+              <div class="education-content">
+                <h3 data-i18n="educationLogicTitle">Lógica de Programação Web</h3>
+                <p>TIC em Trilhas · Venturus</p>
+                <span class="education-detail" data-i18n="hours36">36 horas · 2025</span>
+              </div>
+              <a class="certificate-link" href="./Assets/PDF/logica-programacao-web.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="viewCertificate">Ver certificado</span><span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="education-card reveal">
+              <div class="education-marker" aria-hidden="true">03</div>
+              <div class="education-content">
+                <h3 data-i18n="educationWebTitle">Fundamentos de Desenvolvimento Web</h3>
+                <p>TIC em Trilhas · Venturus</p>
+                <span class="education-detail" data-i18n="hours34">34 horas · 2025</span>
+              </div>
+              <a class="certificate-link" href="./Assets/PDF/fundamentos-desenvolvimento-web.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="viewCertificate">Ver certificado</span><span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="education-card reveal">
+              <div class="education-marker" aria-hidden="true">04</div>
+              <div class="education-content">
+                <h3 data-i18n="educationItemmTitle">Formação extracurricular</h3>
+                <p data-i18n="educationItemmDescription">Pacote Office, Excel, Educação Financeira, PNL, Gestão de Carreiras e Libras · ITEMM</p>
+                <span class="education-detail" data-i18n="hours41">41 horas · 2026</span>
+              </div>
+              <a class="certificate-link" href="./Assets/PDF/formacao-itemm.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="viewCertificate">Ver certificado</span><span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+          <div class="languages-panel reveal">
+            <div><span class="language-label" data-i18n="languagesLabel">IDIOMAS</span><h3 data-i18n="languagesTitle">Comunicação</h3></div>
+            <div class="language-item"><span data-i18n="portugueseLabel">Português</span><span data-i18n="nativeLevel">Nativo</span></div>
+            <div class="language-item"><span data-i18n="englishLabel">Inglês</span><span data-i18n="englishLevel">Intermediário (B1) · leitura e escrita técnica</span></div>
           </div>
         </section>
 
-        <!-- Seção Formação Acadêmica -->
-        <section class="section reveal" id="formacao">
+        <section class="section" id="contato" aria-labelledby="title-contact">
           <div class="section-header reveal">
-            <h2 id="title_formation"></h2>
-            <p id="subtitle_formation"></p>
-          </div>
-          <h2 class="reveal" id="title_formation_current"></h2>
-          <hr />
-          <div class="education-card reveal">
-            <h3 id="formation_current_1_title"></h3>
-            <p id="formation_current_1_text"></p>
-            <span class="time" id="formation_current_1_time"></span>
-          </div>
-          <div class="education-card reveal">
-            <h3 id="formation_current_2_title"></h3>
-            <p id="formation_current_2_text"></p>
-            <span class="time" id="formation_current_2_time"></span>
-          </div>
-
-          <h2 class="reveal" id="title_formation_done"></h2>
-          <hr />
-          <div class="education-card reveal">
-            <h3 id="formation_done_1_title"></h3>
-            <p id="formation_done_1_text"></p>
-            <span class="time" id="formation_done_1_time"></span>
-            <a
-              class="btn primary"
-              href="Assets/PDF/Guilherme Pereira Andraz - Lógica de Programação para Web.pdf"
-              target="_blank"
-              rel="noopener"
-            >
-              <div class="btn-certificate">
-                <span id="formation_done_1_certificate"></span
-                ><img
-                  src="./Assets/IMG/new-tab.png"
-                  alt="Open in new tab icon"
-                  class="icon new-tab"
-                />
-              </div>
-            </a>
-          </div>
-          <div class="education-card reveal">
-            <h3 id="formation_done_2_title"></h3>
-            <p id="formation_done_2_text"></p>
-            <span class="time" id="formationDone3Time"></span>
-            <a
-              class="btn primary"
-              href="Assets/PDF/Guilherme Pereira Andraz - Fundamentos de Desenvolvimento Web .pdf"
-              target="_blank"
-              rel="noopener"
-              id="formation_done_2_certificate"
-            ></a>
-          </div>
-          <div class="education-card reveal">
-            <h3 id="formation_done_3_title"></h3>
-            <p id="formation_current_3_text"></p>
-            <span class="time" id="formation_done_3_time"></span>
-            <a
-              class="btn primary"
-              href="Assets/PDF/certificado ITEMM.pdf"
-              target="_blank"
-              rel="noopener"
-              id="formation_done_3_certificate"
-            ></a>
-          </div>
-          <div class="education-card reveal">
-            <h3 id="formation_done_4_title"></h3>
-            <p id="formation_done_4_text"></p>
-            <span class="time" id="formation_done_4_time"></span>
-          </div>
-          <h2 id="title_formation_future"></h2>
-          <hr />
-          <div class="education-card reveal">
-            <h3 id="formation_future_1_title"></h3>
-            <p id="formation_future_1_text"></p>
-            <span class="time" id="formation_future_1_start"></span>
-            <span class="time" id="formation_future_1_end"></span>
-          </div>
-        </section>
-
-        <!-- Seção de Contato -->
-        <section class="section" id="contato">
-          <div class="section-header reveal">
-            <h2 id="title_contact"></h2>
-          </div>
-          <div class="contact-grid">
-            <div class="contact-card reveal">
-              <h2 id="title_contact">Email:</h2>
-              <p id="contact_description">guilherme.andraz@outlook.com</p>
+            <div class="section-heading-copy">
+              <p class="section-index" data-i18n="contactIndex">05 / CONTATO</p>
+              <h2 id="title-contact" data-i18n="titleContact">Vamos conversar?</h2>
             </div>
-            <div class="contact-card reveal">
-              <h2 id="title_contact">Telefone:</h2>
-              <p id="contact_description">+55 11 93415-4282</p>
-            </div>
+            <p class="section-subtitle" data-i18n="subtitleContact">Disponível para conversar sobre oportunidades de estágio e projetos.</p>
           </div>
-          <div class="message-card reveal">
-            <h4 id="contact_invite"></h4>
-            <p id="contact_note"></p>
-            <form action="POST">
-              <input type="text" name="name" placeholder="Seu nome" required />
-              <input
-                type="email"
-                name="email"
-                placeholder="Seu email"
-                required
-              />
-              <textarea
-                name="message"
-                rows="4"
-                placeholder="Sua mensagem"
-                required
-              ></textarea>
-              <button
-                class="btn primary"
-                type="submit"
-                id="contact_submit"
-              ></button>
-            </form>
+          <div class="contact-layout">
+            <div class="contact-info-card reveal">
+              <p class="contact-lead" data-i18n="contactLead">Você pode falar comigo diretamente pelos canais abaixo.</p>
+              <a class="contact-item" href="mailto:guilherme.andraz@outlook.com"><span class="contact-icon" aria-hidden="true">@</span><span><small data-i18n="emailLabel">E-mail</small><strong>guilherme.andraz@outlook.com</strong></span><span class="contact-arrow" aria-hidden="true">↗</span></a>
+              <a class="contact-item" href="https://wa.me/5511934154282" target="_blank" rel="noopener noreferrer"><span class="contact-icon" aria-hidden="true">↗</span><span><small data-i18n="phoneLabel">Telefone / WhatsApp</small><strong>+55 (11) 93415-4282</strong></span><span class="contact-arrow" aria-hidden="true">↗</span></a>
+              <a class="contact-item" href="https://www.linkedin.com/in/guilhermeandraz/" target="_blank" rel="noopener noreferrer"><span class="contact-icon" aria-hidden="true">in</span><span><small>LinkedIn</small><strong data-i18n="linkedinCta">Conectar profissionalmente</strong></span><span class="contact-arrow" aria-hidden="true">↗</span></a>
+              <a class="contact-item" href="https://github.com/guiguix7" target="_blank" rel="noopener noreferrer"><span class="contact-icon" aria-hidden="true">GH</span><span><small>GitHub</small><strong data-i18n="githubCta">Explorar repositórios</strong></span><span class="contact-arrow" aria-hidden="true">↗</span></a>
+            </div>
+            <div class="message-card reveal">
+              <h3 data-i18n="messageTitle">Prefere preparar uma mensagem?</h3>
+              <p data-i18n="messageDescription">Preencha os campos e seu aplicativo de e-mail será aberto com a mensagem pronta para revisão.</p>
+              <form id="contact-form">
+                <label for="contact-name" data-i18n="nameLabel">Seu nome</label>
+                <input id="contact-name" name="name" type="text" autocomplete="name" required placeholder="Como posso te chamar?" data-i18n-placeholder="namePlaceholder" />
+                <label for="contact-email" data-i18n="senderEmailLabel">Seu e-mail</label>
+                <input id="contact-email" name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com" data-i18n-placeholder="senderEmailPlaceholder" />
+                <label for="contact-message" data-i18n="messageLabel">Mensagem</label>
+                <textarea id="contact-message" name="message" rows="4" required placeholder="Escreva sua mensagem..." data-i18n-placeholder="messagePlaceholder"></textarea>
+                <button class="btn primary form-submit" type="submit"><span data-i18n="prepareMessage">Preparar e-mail</span><span aria-hidden="true">↗</span></button>
+                <p class="form-note" id="form-note" role="status" data-i18n="formNote">Este formulário não envia dados a um servidor; ele prepara uma mensagem no seu aplicativo de e-mail.</p>
+              </form>
+            </div>
           </div>
         </section>
       </main>
 
-      <!-- Seção de Footer -->
       <footer class="footer reveal">
-        <p id="footer_copyright">
-          &copy; 2026 Guilherme Andraz - Todos os direitos reservados.
-        </p>
-        <div class="cta-row-footer">
-          <a
-            class="btn ghost github"
-            href="https://github.com/guiguix7"
-            target="_blank"
-            rel="noopener noreferrer"
-            id="footer_github"
-            ><img src="Assets/IMG/github.png" alt="Icone do GitHub" />GitHub</a
-          >
-          <a
-            class="btn ghost linkedin"
-            href="https://www.linkedin.com/in/guilhermeandraz/"
-            target="_blank"
-            rel="noopener noreferrer"
-            id="footer_linkedin"
-            ><img
-              src="Assets/IMG/linkedin.png"
-              alt="Icone do LinkedIn"
-            />LinkedIn</a
-          >
-          <a
-            class="btn ghost whatsapp"
-            href="https://wa.me/5511934154282"
-            target="_blank"
-            rel="noopener noreferrer"
-            id="footer_whatsapp"
-            ><img
-              src="Assets/IMG/whatsapp.png"
-              alt="Icone do WhatsApp"
-            />WhatsApp</a
-          >
-          <a
-            class="btn ghost instagram"
-            href="https://www.instagram.com/guiguix7/"
-            target="_blank"
-            rel="noopener noreferrer"
-            id="footer_instagram"
-            ><img
-              src="Assets/IMG/instagram.png"
-              alt="Icone do Instagram"
-            />Instagram</a
-          >
-          <a
-            class="btn ghost email"
-            href="mailto:guilhermeandraz@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            id="footer_email"
-            ><img src="Assets/IMG/o-email.png" alt="Icone do Email" />Email</a
-          >
-        </div>
+        <a class="footer-brand" href="#inicio"><span class="brand-mark" aria-hidden="true">GA<span>.</span></span><span>Guilherme Andraz</span></a>
+        <p><span data-i18n="footerText">Construído com HTML, CSS e JavaScript.</span> <span class="footer-divider" aria-hidden="true">·</span> <span>© <span id="current-year">2026</span> Guilherme Andraz</span></p>
+        <a class="back-top" href="#inicio"><span data-i18n="backToTop">Voltar ao topo</span><span aria-hidden="true">↑</span></a>
       </footer>
     </div>
-
-    <script src="./JS/script.js" defer></script>
     <script src="./JS/lang.js" defer></script>
+    <script src="./JS/script.js" defer></script>
   </body>
 </html>

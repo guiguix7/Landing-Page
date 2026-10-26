@@ -1,17 +1,12 @@
-node_modules/
-dist/
-dist-ssr/
-.vercel/
+# Secrets and environment configuration
 .env
 .env.*
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+!.env.example
+
+# Local tooling
+node_modules/
+.vercel/
+.vscode/
 .DS_Store
 Thumbs.db
-.idea/
-.vscode/
-package.json
-package-lock.json
-vite.config.ts
+*.log

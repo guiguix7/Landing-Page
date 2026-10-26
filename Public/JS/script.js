@@ -1,915 +1,219 @@
-// Animação de revelação
-const revealItems = document.querySelectorAll(".reveal");
+(() => {
+  const translations = window.PORTFOLIO_TRANSLATIONS;
+  if (!translations) return;
 
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
+  const projectLinks = {
+    orva: "https://github.com/guiguix7/Orva",
+    drazyx: "https://github.com/guiguix7/Drazyx",
+    easyvan: "https://github.com/guiguix7/EasyVan",
+    portfolio: "https://github.com/guiguix7/Landing-Page"
+  };
+  const groupOrder = ["frontend", "backend", "data", "mobile", "tools"];
+  const groupMembers = {
+    frontend: ["javascript", "typescript", "react", "html", "css", "tailwind"],
+    backend: ["node", "csharp", "aspnet", "rest"],
+    data: ["sql", "postgres", "sqlite"],
+    mobile: ["flutter", "dart"],
+    tools: ["git", "github"]
+  };
+  const body = document.body;
+  const skillGroupsEl = document.getElementById("skill-groups");
+  const skillDetailTitle = document.getElementById("skill-detail-title");
+  const skillDetailCategory = document.getElementById("skill-detail-category");
+  const skillDetailDescription = document.getElementById("skill-detail-description");
+  const skillRelatedProjects = document.getElementById("skill-related-projects");
+  const skillDetailNote = document.getElementById("skill-detail-note");
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+  let currentLanguage = "pt";
+  let activeSkill = "javascript";
+
+  function safeRead(key) {
+    try { return window.localStorage.getItem(key); } catch { return null; }
+  }
+  function safeWrite(key, value) {
+    try { window.localStorage.setItem(key, value); } catch { /* local storage may be unavailable for file URLs */ }
+  }
+
+  function applyTranslations(language) {
+    const copy = translations[language] || translations.pt;
+    currentLanguage = translations[language] ? language : "pt";
+    document.documentElement.lang = copy.documentLang;
+    document.title = copy.pageTitle;
+    const description = document.querySelector('meta[name="description"]');
+    if (description) description.setAttribute("content", copy.metaDescription);
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", copy.pageTitle);
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) ogDescription.setAttribute("content", copy.metaDescription);
+    const ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.setAttribute("content", currentLanguage === "pt" ? "pt_BR" : "en_US");
+
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+      const key = element.dataset.i18n;
+      if (Object.prototype.hasOwnProperty.call(copy, key) && typeof copy[key] === "string") {
+        element.textContent = copy[key];
+      }
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+      const key = element.dataset.i18nPlaceholder;
+      if (typeof copy[key] === "string") element.setAttribute("placeholder", copy[key]);
+    });
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+      const key = element.dataset.i18nAriaLabel;
+      if (typeof copy[key] === "string") element.setAttribute("aria-label", copy[key]);
+    });
+    document.querySelectorAll(".language-button").forEach((button) => {
+      const active = button.dataset.language === currentLanguage;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    safeWrite("portfolio-language", currentLanguage);
+    renderSkills();
+  }
+
+  function makeElement(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text !== undefined && text !== null) element.textContent = text;
+    return element;
+  }
+
+  function renderSkills() {
+    const copy = translations[currentLanguage];
+    skillGroupsEl.replaceChildren();
+    let count = 0;
+    groupOrder.forEach((groupKey) => {
+      const group = makeElement("section", "skill-group");
+      const label = makeElement("h4", "skill-group-label", copy.groups[groupKey]);
+      const list = makeElement("ul", "tag-list");
+      list.setAttribute("aria-label", copy.groups[groupKey]);
+      groupMembers[groupKey].forEach((skillKey) => {
+        const skill = copy.skills[skillKey];
+        if (!skill) return;
+        count += 1;
+        const li = document.createElement("li");
+        const button = makeElement("button", "skill-btn", skill.name);
+        button.type = "button";
+        button.dataset.skill = skillKey;
+        button.setAttribute("aria-pressed", String(skillKey === activeSkill));
+        if (skillKey === activeSkill) button.classList.add("is-active");
+        button.addEventListener("click", () => selectSkill(skillKey));
+        li.append(button);
+        list.append(li);
+      });
+      group.append(label, list);
+      skillGroupsEl.append(group);
+    });
+    document.getElementById("skills-count").textContent = String(count).padStart(2, "0");
+    renderSkillDetail(activeSkill);
+  }
+
+  function selectSkill(skillKey) {
+    activeSkill = skillKey;
+    skillGroupsEl.querySelectorAll(".skill-btn").forEach((button) => {
+      const selected = button.dataset.skill === skillKey;
+      button.classList.toggle("is-active", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+    renderSkillDetail(skillKey);
+  }
+
+  function renderSkillDetail(skillKey) {
+    const copy = translations[currentLanguage];
+    const skill = copy.skills[skillKey] || copy.skills.javascript;
+    skillDetailTitle.textContent = skill.name;
+    skillDetailCategory.textContent = copy.categories[skill.category] || "";
+    skillDetailDescription.textContent = skill.description;
+    skillRelatedProjects.replaceChildren();
+    if (skill.projects && skill.projects.length) {
+      skill.projects.forEach((projectKey) => {
+        const link = makeElement("a", "related-project-link");
+        link.href = projectLinks[projectKey] || "#projetos";
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        const label = makeElement("span", "", copy.projectNames[projectKey] || projectKey);
+        const arrow = makeElement("span", "", "↗");
+        arrow.setAttribute("aria-hidden", "true");
+        link.append(label, arrow);
+        skillRelatedProjects.append(link);
+      });
+      skillDetailNote.textContent = "";
+    } else {
+      skillDetailNote.textContent = copy.noProjectEvidence;
+    }
+  }
+
+  function setTheme(theme) {
+    const dark = theme === "dark";
+    body.classList.toggle("theme-dark", dark);
+    themeToggle.setAttribute("aria-pressed", String(dark));
+    themeIcon.textContent = dark ? "☀" : "☾";
+    safeWrite("portfolio-theme", dark ? "dark" : "light");
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.setAttribute("content", dark ? "#07111d" : "#f4f6fb");
+  }
+
+  function initTheme() {
+    const saved = safeRead("portfolio-theme");
+    if (saved === "dark" || saved === "light") {
+      setTheme(saved);
+      return;
+    }
+    // Keep the portfolio's original light appearance as the default; the visitor can switch themes.
+    setTheme("light");
+  }
+
+  function initReveal() {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+    if (!("IntersectionObserver" in window)) {
+      document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+    body.classList.add("js-ready");
+    const observer = new IntersectionObserver((entries, activeObserver) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+          activeObserver.unobserve(entry.target);
         }
       });
-    },
-    { threshold: 0.2 },
-  );
+    }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
+    document.querySelectorAll(".reveal").forEach((element, index) => {
+      element.style.transitionDelay = `${Math.min(index % 5, 4) * 35}ms`;
+      observer.observe(element);
+    });
+  }
 
-  revealItems.forEach((item, index) => {
-    const delay = Math.min(index * 60, 240);
-    item.style.transitionDelay = `${delay}ms`;
-    observer.observe(item);
+  function initContactForm() {
+    const form = document.getElementById("contact-form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const formData = new FormData(form);
+      const name = String(formData.get("name") || "").trim();
+      const senderEmail = String(formData.get("email") || "").trim();
+      const message = String(formData.get("message") || "").trim();
+      if (!name || !senderEmail || !message) return;
+      const subject = encodeURIComponent(`Contato pelo portfólio — ${name}`);
+      const bodyText = encodeURIComponent(`Nome: ${name}\nE-mail: ${senderEmail}\n\nMensagem:\n${message}`);
+      const note = document.getElementById("form-note");
+      note.textContent = translations[currentLanguage].formPreparing;
+      window.location.href = `mailto:guilherme.andraz@outlook.com?subject=${subject}&body=${bodyText}`;
+    });
+  }
+
+  document.querySelectorAll(".language-button").forEach((button) => {
+    button.addEventListener("click", () => applyTranslations(button.dataset.language));
   });
-} else {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
-}
-
-// Dropdown do botão de download
-const dropdownToggle = document.querySelector('#download-dropdown .dropdown-toggle');
-const dropdownMenu = document.querySelector('#download-dropdown .dropdown-menu');
-
-if (dropdownToggle && dropdownMenu) {
-  dropdownToggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    const expanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
-    dropdownToggle.setAttribute('aria-expanded', !expanded);
-    dropdownMenu.setAttribute('aria-hidden', expanded);
-  });
-
-  // Fechar ao clicar fora
-  document.addEventListener('click', (e) => {
-    if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
-      dropdownToggle.setAttribute('aria-expanded', 'false');
-      dropdownMenu.setAttribute('aria-hidden', 'true');
-    }
-  });
-
-  // Fechar ao pressionar Esc
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && dropdownToggle.getAttribute('aria-expanded') === 'true') {
-      dropdownToggle.setAttribute('aria-expanded', 'false');
-      dropdownMenu.setAttribute('aria-hidden', 'true');
-    }
-  });
-}
-
-const themeToggle = document.getElementById("theme-toggle");
-const themeStorageKey = "landing-page-theme";
-
-function setTheme(theme) {
-  const isDark = theme === "dark";
-
-  document.body.classList.toggle("theme-dark", isDark);
-
-  if (themeToggle) {
-    themeToggle.classList.toggle("is-dark", isDark);
-    themeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
-    themeToggle.setAttribute(
-      "aria-label",
-      isDark ? "Alternar para tema claro" : "Alternar para tema escuro",
-    );
-  }
-
-  try {
-    localStorage.setItem(themeStorageKey, theme);
-  } catch (error) {
-    // Sem persistência se o armazenamento estiver indisponível.
-  }
-}
-
-function getInitialTheme() {
-  try {
-    const savedTheme = localStorage.getItem(themeStorageKey);
-
-    if (savedTheme === "dark" || savedTheme === "light") {
-      return savedTheme;
-    }
-  } catch (error) {
-    // Sem persistência se o armazenamento estiver indisponível.
-  }
-
-  return window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
-
-if (themeToggle) {
-  setTheme(getInitialTheme());
-
-  themeToggle.addEventListener("click", () => {
-    setTheme(document.body.classList.contains("theme-dark") ? "light" : "dark");
-  });
-}
-/*
-var site = window.document.getElementById('site')
-
-site.addEventListener('mouseleave', () => {
-    alert('Já vai embora? Volte sempre que quiser! :)');
-})
-*/
-// ====== //
-
-// Lógica para exibir detalhes das skills
-// Variaveis e valores
-var info = document.getElementById("skill");
-var buttons = document.getElementsByName("btn-skils");
-
-function logica() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("logica").style.backgroundColor =
-    "#1e5f8a");
-  var color = (document.getElementById("logica").style.color = "#fff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Lógica de Programação</h3>
-                            <h4 style="color: #1e5f8a;">Conhecimentos Gerais</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>86%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 86%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="86"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>82%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 82%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="82"></div>
-                            </div>`;
-}
-
-function Ingles() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Inglês").style.backgroundColor =
-    "#1e5f8a");
-  var color = (document.getElementById("Inglês").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Inglês</h3>
-                            <h4 style="color: #1e5f8a;">Conhecimentos Gerais</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Nível: Intermediário</span>
-                                    <span>60%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 60%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="60"></div>
-                            </div>`;
-}
-
-function Git() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("git").style.backgroundColor =
-    "#1e5f8a");
-  var color = (document.getElementById("git").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Git</h3>
-                            <h4 style="color: #1e5f8a;">Conhecimentos Gerais</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>60%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 60%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="60"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>90%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 90%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="90"></div>
-                            </div>`;
-}
-
-function GitHub() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("github").style.backgroundColor =
-    "#1e5f8a");
-  var color = (document.getElementById("github").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>GitHub</h3>
-                            <h4 style="color: #1e5f8a;">Conhecimentos Gerais</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>70%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 70%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="70"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function Vercel() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("vercel").style.backgroundColor =
-    "#1e5f8a");
-  var color = (document.getElementById("vercel").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Vercel</h3>
-                            <h4 style="color: #1e5f8a;">Conhecimentos Gerais</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>60%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 60%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="60"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>60%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 60%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="60"></div>
-                            </div>`;
-}
-
-function AWS() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("aws").style.backgroundColor =
-    "#1e5f8a");
-  var color = (document.getElementById("aws").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Amazon Web Services</h3>
-                            <h4 style="color: #1e5f8a;">Conhecimentos Gerais</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>50%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 50%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="50"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>0%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 0%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="0"></div>
-                            </div>`;
-}
-
-function HTML() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("HTML").style.backgroundColor =
-    "#c13584");
-  var color = (document.getElementById("HTML").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>HTML</h3>
-                            <h4 style="color: #c13584;">Front-end</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>92%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 92%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="92"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>98%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 98%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="98"></div>
-                            </div>`;
-}
-
-function CSS() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("CSS").style.backgroundColor =
-    "#c13584");
-  var color = (document.getElementById("CSS").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>CSS</h3>
-                            <h4 style="color: #c13584;">Front-end</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>88%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 88%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="88"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>93%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 93%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="93"></div>
-                            </div>`;
-}
-
-function JavaScript() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("JavaScript").style.backgroundColor =
-    "#c13584");
-  var color = (document.getElementById("JavaScript").style.color = "#fff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>JavaScript</h3>
-                            <h4 style="color: #c13584;">Front-end</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>85%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 85%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="85"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>70%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 70%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="70"></div>
-                            </div>`;
-}
-
-function TypeScript() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("TypeScript").style.backgroundColor =
-    "#c13584");
-  var color = (document.getElementById("TypeScript").style.color = "#fff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>TypeScript</h3>
-                            <h4 style="color: #c13584;">Front-end</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>50%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 50%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="50"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>10%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 10%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="10%"></div>
-                            </div>`;
-}
-
-function React() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("React").style.backgroundColor =
-    "#8a2be2");
-  var color = (document.getElementById("React").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>React</h3>
-                            <h4><span style="color: #c13584;">Frontend</span><span>/</span><span style="color: #8a2be2;">Framework</span></h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function JQuery() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("JQuery").style.backgroundColor =
-    "#8a2be2");
-  var color = (document.getElementById("JQuery").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>JQuery</h3>
-                            <h4><span style="color: #c13584;">Frontend</span><span>/</span><span style="color: #8a2be2;">Library/Framework</span></h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function CSharp() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("CSharp").style.backgroundColor =
-    "#4a90e2");
-  var color = (document.getElementById("CSharp").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>C# (ASP.NET | MVC)</h3>
-                            <h4 style="color: #4a90e2;">Back-end</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function Python() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Python").style.backgroundColor =
-    "#4a90e2");
-  var color = (document.getElementById("Python").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Python</h3>
-                            <h4 style="color: #4a90e2;">Back-end</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function NodeJS() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Node.js").style.backgroundColor =
-    "#4a90e2");
-  var color = (document.getElementById("Node.js").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-              <h3>Node.js</h3>
-                            <h4 style="color: #4a90e2;">Back-end</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function ExpressJS() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Express.js").style.backgroundColor =
-    "#4a90e2");
-  var color = (document.getElementById("Express.js").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Express.js</h3>
-                            <h4 style="color: #4a90e2;">Back-end</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function API() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("APIs REST").style.backgroundColor =
-    "#4a90e2");
-  var color = (document.getElementById("APIs REST").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>APIs REST</h3>
-                            <h4 style="color: #4a90e2;">Back-end</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function Bootstrap() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Bootstrap").style.backgroundColor =
-    "#8a2be2");
-  var color = (document.getElementById("Bootstrap").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Bootstrap</h3>
-                            <h4 style="color: #8a2be2;">Framework</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function VueJS() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Vue.js").style.backgroundColor =
-    "#8a2be2");
-  var color = (document.getElementById("Vue.js").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Vue.js</h3>
-                            <h4><span style="color: #c13584;">Frontend</span><span>/</span><span style="color: #8a2be2;">Framework</span></h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function Angular() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Angular").style.backgroundColor =
-    "#8a2be2");
-  var color = (document.getElementById("Angular").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Angular</h3>
-                            <h4><span style="color: #c13584;">Frontend</span><span>/</span><span style="color: #8a2be2;">Framework</span></h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function NextJS() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Next.js").style.backgroundColor =
-    "#8a2be2");
-  var color = (document.getElementById("Next.js").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Next.js</h3>
-                            <h4><span style="color: #c13584;">Frontend</span><span>/</span><span style="color: #8a2be2;">Framework</span></h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function SQL() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("SQL").style.backgroundColor =
-    "#50c878");
-  var color = (document.getElementById("SQL").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>SQL</h3>
-                            <h4 style="color: #50c878;">Banco de Dados</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function MongoDB() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("MongoDB").style.backgroundColor =
-    "#50c878");
-  var color = (document.getElementById("MongoDB").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>MongoDB</h3>
-                            <h4 style="color: #50c878;">Banco de Dados</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function Firebase() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Firebase").style.backgroundColor =
-    "#50c878");
-  var color = (document.getElementById("Firebase").style.color = "#ffff");
-
-  info.innerHTML = `<div class="txt">
-                            <h3>Firebase</h3>
-                            <h4 style="color: #50c878;">Banco de Dados</h4>
-                        </div>
-                        <div class="meter-list">
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Conhecimento</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>
-                            <div class="meter-item">
-                                <div class="meter-label">
-                                    <span>Experiência</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="meter-bar" style="--level: 80%;" role="progressbar" aria-valuemin="0"
-                                    aria-valuemax="100" aria-valuenow="80"></div>
-                            </div>`;
-}
-
-function SoftSkills() {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = " #e9eef6";
-    buttons[i].style.color = " #233146";
-  }
-  var bgColor = (document.getElementById("Soft Skills").style.backgroundColor =
-    "#ffa500");
-  var color = (document.getElementById("Soft Skills").style.color = "#ffff");
-  info.innerHTML = `<div class="txt">
-                            <h3>Soft Skills</h3>
-                            <h4 style="color: #ffa500;">Habilidades Técnicas</h4>
-                        </div>
-                            <div class="meter-list">
-                                <div class="meter-item">
-                                    <div class="meter-label">
-                                        <span>Organização</span>
-                                        <span>86%</span>
-                                    </div>
-                                    <div class="meter-bar" style="--level: 86%;" role="progressbar" aria-valuemin="0"
-                                        aria-valuemax="100" aria-valuenow="86"></div>
-                                </div>
-                                <div class="meter-item">
-                                    <div class="meter-label">
-                                        <span>Aprendizado rápido</span>
-                                        <span>82%</span>
-                                    </div>
-                                    <div class="meter-bar" style="--level: 82%;" role="progressbar" aria-valuemin="0"
-                                        aria-valuemax="100" aria-valuenow="82"></div>
-                                </div>
-                                <div class="meter-item">
-                                    <div class="meter-label">
-                                        <span>Autonomia</span>
-                                        <span>78%</span>
-                                    </div>
-                                    <div class="meter-bar" style="--level: 78%;" role="progressbar" aria-valuemin="0"
-                                        aria-valuemax="100" aria-valuenow="78"></div>
-                                </div>
-                            </div>`;
-}
+  themeToggle.addEventListener("click", () => setTheme(body.classList.contains("theme-dark") ? "light" : "dark"));
+  document.getElementById("current-year").textContent = String(new Date().getFullYear());
+
+  initTheme();
+  applyTranslations(safeRead("portfolio-language") || "pt");
+  initReveal();
+  initContactForm();
+})();
